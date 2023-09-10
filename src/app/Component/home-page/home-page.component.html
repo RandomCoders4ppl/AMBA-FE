@@ -1,0 +1,5 @@
+<div class="grid grid-cols-4 gap-2 items-center place-items-center w-full">
+    <app-project-cards  *ngFor="let p of projectList;" name="{{p.projectName}}" image="{{'data:image/png;base64,'+p.image}}" id="{{p.id}}"></app-project-cards>
+</div>
+
+
