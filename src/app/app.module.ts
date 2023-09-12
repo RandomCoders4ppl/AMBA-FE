@@ -12,7 +12,16 @@ import {MatButtonModule} from '@angular/material/button';
 import { ProjectCardsComponent } from './Shared/project-cards/project-cards.component';
 import {MatCardModule} from '@angular/material/card'
 import { HttpClientModule } from  '@angular/common/http';
-import { QuestionPageComponent } from './Component/question-page/question-page.component'
+import { QuestionPageComponent } from './Component/question-page/question-page.component';
+import { AdminPageComponent } from './Component/admin-page/admin-page.component';
+import { AdminQuestionPageComponent } from './Component/admin-question-page/admin-question-page.component'
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 @NgModule({
@@ -22,6 +31,8 @@ import { QuestionPageComponent } from './Component/question-page/question-page.c
     NavBarComponent,
     ProjectCardsComponent,
     QuestionPageComponent,
+    AdminPageComponent,
+    AdminQuestionPageComponent,
     
   ],
   imports: [
@@ -32,7 +43,13 @@ import { QuestionPageComponent } from './Component/question-page/question-page.c
     MatToolbarModule,
     MatButtonModule, 
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatExpansionModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
