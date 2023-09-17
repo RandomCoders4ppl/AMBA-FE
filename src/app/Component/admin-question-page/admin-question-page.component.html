@@ -1,33 +1,41 @@
 <mat-expansion-panel class="!rounded-none !bg-orange-300">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-       Question
-      </mat-panel-title>
-      <mat-panel-description>
-       Add New
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Question
+    </mat-panel-title>
+    <mat-panel-description>
+      Add New
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-form-field>
-        <mat-label>Select</mat-label>
-        <mat-select>
-          <mat-option value="one">First option</mat-option>
-          <mat-option value="two">Second option</mat-option>
-        </mat-select>
-      </mat-form-field>
-    <input class="ng-hide" id="input-file-id" multiple type="file" />
-    <label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>  
+      <mat-label>Select</mat-label>
+      <mat-select formControlName="projectId">
+        <mat-option *ngFor="let project of projects" value="{{project.id}}">{{project.projectName}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <input class="ng-hide" id="input-file-id" multiple type="file" formControlName="QuestionImage" />
+    <label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
     <section>
-        <div class="example-label">Add Options</div>
-        <div class="example-button-row">
-            <div class="example-button-container">
-              <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon">
-                <mat-icon>plus_one</mat-icon>
-              </button>
-            </div>
+      <div class="example-label">Add Options</div>
+      <div class="example-button-row">
+        <div class="example-button-container">
+          <button type="button" mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon" (click)="addOption()">
+            <mat-icon>plus_one</mat-icon>
+          </button>
         </div>
+      </div>
+    </section>
+    <div formArrayName="Options">
+      <section *ngFor="let option of getAllOptions;let i=index" [formGroupName]="i">
+        <input type="text" placeholder="Options name" class="text-red-950"  formControlName="answer">
+        <input class="ng-hide" id="input-file-id" multiple type="file" formControlName="answerImage"/>
+        <label for="input-file-id" class="md-button md-raised md-primary">Upload Question Image</label>
+        <input type="radio" value="{{i}}" name="answer_index"  [(ngModel)] = "answer_index" [ngModelOptions]="{standalone: true}" >
       </section>
-     <section>
-
-     </section> 
+   </div>
+    <section>
+      <button type="submit" id="submit">SUBMIT</button>
+    </section>
+  </form>
 </mat-expansion-panel>
