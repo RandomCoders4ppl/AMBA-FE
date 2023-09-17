@@ -17,4 +17,8 @@ export class ProjectCardService {
     return this.http.get<Project[]>(this.url);
   }
 
+  getAllProjectsNoImage(){
+    return this.http.get<Project[]>("http://localhost:8080/project/list/noImage")
+  }
+
 }
