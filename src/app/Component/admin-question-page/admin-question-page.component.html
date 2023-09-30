@@ -14,7 +14,7 @@
         <mat-option *ngFor="let project of projects" value="{{project.id}}">{{project.projectName}}</mat-option>
       </mat-select>
     </mat-form-field>
-    <input class="ng-hide" id="input-file-id" multiple type="file" formControlName="QuestionImage" />
+    <input class="ng-hide" id="input-file-id" type="file"  (change)="setQuestionFile($event)"/>
     <label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
     <section>
       <div class="example-label">Add Options</div>
@@ -29,7 +29,7 @@
     <div formArrayName="Options">
       <section *ngFor="let option of getAllOptions;let i=index" [formGroupName]="i">
         <input type="text" placeholder="Options name" class="text-red-950"  formControlName="answer">
-        <input class="ng-hide" id="input-file-id" multiple type="file" formControlName="answerImage"/>
+        <input class="ng-hide" id="input-file-id" type="file"  (change)="setOptionImageFile($event,i)"/>
         <label for="input-file-id" class="md-button md-raised md-primary">Upload Question Image</label>
         <input type="radio" value="{{i}}" name="answer_index"  [(ngModel)] = "answer_index" [ngModelOptions]="{standalone: true}" >
       </section>
