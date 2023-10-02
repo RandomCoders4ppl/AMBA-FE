@@ -7,7 +7,9 @@ import {Question} from '../Models/question'
   providedIn: 'root'
 })
 export class QuestionService {
+  
 
+  QUESTION_BASE_URL = "http://localhost:8080/Question/"
 
   constructor(private http : HttpClient) { }
 
@@ -16,6 +18,11 @@ export class QuestionService {
     const headers  =  new HttpHeaders()
     headers.set('content-type', 'multipart/form-data')
     return this.http.post<any>(url,question,{headers:headers});
+  }
+
+  getAllQuestionByProject(UUID : string):Observable<any>{
+    const url = this.QUESTION_BASE_URL + UUID +"/all"
+    return this.http.get(url);
   }
 
 }
