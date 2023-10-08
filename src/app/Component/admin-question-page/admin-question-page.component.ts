@@ -3,7 +3,6 @@ import {FormBuilder,FormControl,Validators,FormGroup, FormArray} from '@angular/
 import { Observable, ReplaySubject } from 'rxjs';
 import { Answer } from 'src/app/Models/answer';
 import { Project } from 'src/app/Models/project';
-import { Question } from 'src/app/Models/question';
 import { ProjectCardService } from 'src/app/Service/Shared/project-cards/project-card.service';
 import { QuestionService } from 'src/app/Service/question.service';
 
@@ -18,7 +17,6 @@ export class AdminQuestionPageComponent implements OnInit{
   
   projects : Project[] = [];
 
-  question? : Question ;
 
   answer_index : String = '';
   
@@ -30,10 +28,11 @@ export class AdminQuestionPageComponent implements OnInit{
   ngOnInit(): void {
     this.projectService.getAllProjectsNoImage().subscribe(res => this.projects = res);
     this.form = this.formBuilder.group({
-      projectId : new FormControl(null),
-      QuestionImage :  new FormControl(null),
+      projectId : new FormControl(null,Validators.required),
+      QuestionImage :  new FormControl(null,Validators.required),
+      questionText : new FormControl(null),
       Options: new FormArray([]),
-      answer_id :new FormControl(null),
+      answer_id :new FormControl(null,Validators.required),
     })
   }
   
@@ -41,10 +40,10 @@ export class AdminQuestionPageComponent implements OnInit{
   onSubmit(){
     this.form.controls['answer_id'].setValue(this.answer_index)
     // before this need tto validate values 
-    this.question = this.form.value;
     const formData = new FormData();
     formData.append('projectId', this.form.value.projectId);
     formData.append('QuestionImage', this.form.value.QuestionImage);
+    formData.append('question_text',this.form.value.questionText)
     const ans : Answer[] = this.form.value.Options;
     formData.append('options', new Blob([JSON.stringify(ans)],{  type: "application/json"}));
     formData.append('answer_id', this.form.value.answer_id);
