@@ -20,9 +20,9 @@ export class QuestionService {
     return this.http.post<any>(url,question,{headers:headers});
   }
 
-  getAllQuestionByProject(UUID : string):Observable<any>{
-    const url = this.QUESTION_BASE_URL + UUID +"/all"
-    return this.http.get(url);
+  getAllQuestionByProject(UUID : string,page:number):Observable<any>{
+    const url = this.QUESTION_BASE_URL + UUID +"/all?page="+page;
+    return this.http.get<Question>(url);
   }
 
 }
