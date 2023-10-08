@@ -22,7 +22,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ReactiveFormsModule,FormsModule} from '@angular/forms';
-
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -52,7 +52,8 @@ import { ReactiveFormsModule,FormsModule} from '@angular/forms';
     MatRadioModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
