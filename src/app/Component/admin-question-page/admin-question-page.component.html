@@ -15,6 +15,7 @@
       </mat-select>
     </mat-form-field>
     <input class="ng-hide" id="input-file-id" type="file"  (change)="setQuestionFile($event)"/>
+    <input type="text" placeholder="Question Text" class="text-red-950"  formControlName="questionText">
     <label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
     <section>
       <div class="example-label">Add Options</div>
