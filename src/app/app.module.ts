@@ -23,6 +23,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ReactiveFormsModule,FormsModule} from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { AuthComponent } from './Component/auth/auth.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     QuestionPageComponent,
     AdminPageComponent,
     AdminQuestionPageComponent,
+    AuthComponent,
     
   ],
   imports: [
