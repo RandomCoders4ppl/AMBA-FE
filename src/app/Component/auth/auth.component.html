@@ -1,1 +1,60 @@
-<p>auth works!</p>
+<section class="User_Registeration" *ngIf="!NewUser">
+    <mat-card class="!rounded-none">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Login In</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="LoginForm">
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput placeholder="abc@gmail.com" formControlName="User_Email" />
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>password</mat-label>
+                    <input type="password" matInput formControlName="User_Password" />
+                </mat-form-field>
+
+                <button mat-button (click)="LogIn()">Log In</button>
+
+            </form>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <p>New User </p>
+            <button mat-button (click)="setNewUser(true)">Sign Up</button>
+        </mat-card-actions>
+    </mat-card>
+</section>
+
+<section class="User_Login" *ngIf="NewUser">
+    <mat-card class="!rounded-none">
+        <mat-card-header>
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Sign Up</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="SignUp">
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input type="text" matInput placeholder="Naveen M" formControlName="Name" />
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput placeholder="abc@gmail.com" formControlName="User_Email" />
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>password</mat-label>
+                    <input type="password" matInput formControlName="User_Password" />
+                </mat-form-field>
+
+                <button mat-button (click)="RegNewUser()">Log In</button>
+            </form>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <p>Already existing User</p>
+            <button mat-button (click)="setNewUser(false)">Log In</button>
+        </mat-card-actions>
+    </mat-card>
+</section>
