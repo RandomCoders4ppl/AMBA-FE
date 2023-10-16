@@ -5,13 +5,14 @@ import { QuestionPageComponent } from './Component/question-page/question-page.c
 import { AdminPageComponent } from './Component/admin-page/admin-page.component';
 import { AdminQuestionPageComponent } from './Component/admin-question-page/admin-question-page.component';
 import { AuthComponent } from './Component/auth/auth.component';
+import { RoleGuard} from './Ngguard/guard.guard';
 
 const routes: Routes = [
-  {path:'project/:id',component:QuestionPageComponent},
-  {path:'admin',component:AdminPageComponent},
-  {path:'admin/questions',component:AdminQuestionPageComponent},
+  {path:'project/:id',component:QuestionPageComponent,canActivate:[RoleGuard]},
+  {path:'admin',component:AdminPageComponent,canActivate:[RoleGuard]},
+  {path:'admin/questions',component:AdminQuestionPageComponent,canActivate:[RoleGuard]},
   {path:'login',component:AuthComponent},
-  {path:'',component:HomePageComponent}
+  {path:'',component:HomePageComponent,canActivate:[RoleGuard]}
 ];
 
 @NgModule({

@@ -11,7 +11,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { ProjectCardsComponent } from './Shared/project-cards/project-cards.component';
 import {MatCardModule} from '@angular/material/card'
-import { HttpClientModule } from  '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from  '@angular/common/http';
 import { QuestionPageComponent } from './Component/question-page/question-page.component';
 import { AdminPageComponent } from './Component/admin-page/admin-page.component';
 import { AdminQuestionPageComponent } from './Component/admin-question-page/admin-question-page.component'
@@ -24,6 +24,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ReactiveFormsModule,FormsModule} from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { AuthComponent } from './Component/auth/auth.component';
+import { JwtTokenInterceptor } from './jwt-token.interceptor';
 
 
 @NgModule({
@@ -57,7 +58,7 @@ import { AuthComponent } from './Component/auth/auth.component';
     FormsModule,
     MatGridListModule
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:JwtTokenInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
