@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Auth } from '../Models/Auth';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private httpclient: HttpClient) { }
+  constructor(private httpclient: HttpClient,private jwtHelper: JwtHelperService) { }
 
   BASE_URL_AUTH = 'http://localhost:8080/auth/'
 
@@ -37,5 +38,12 @@ export class AuthService {
     throw new Error("No Token Found")
   }
 
-
+  public getExpirationDate() : boolean{
+      const jwt = this.getJwtToken()
+      if(jwt != null){
+        console.log(this.jwtHelper.getTokenExpirationDate(jwt))
+        return this.jwtHelper.isTokenExpired(jwt);
+      }
+      return true;
+  }
 }
