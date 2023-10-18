@@ -25,6 +25,7 @@ import { ReactiveFormsModule,FormsModule} from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { AuthComponent } from './Component/auth/auth.component';
 import { JwtTokenInterceptor } from './jwt-token.interceptor';
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -56,9 +57,10 @@ import { JwtTokenInterceptor } from './jwt-token.interceptor';
     MatCheckboxModule,
     ReactiveFormsModule,
     FormsModule,
-    MatGridListModule
+    MatGridListModule,
   ],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:JwtTokenInterceptor,multi:true}],
+  providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,{provide:HTTP_INTERCEPTORS,useClass:JwtTokenInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
