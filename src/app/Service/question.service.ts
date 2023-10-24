@@ -25,4 +25,9 @@ export class QuestionService {
     return this.http.get<Question>(url);
   }
 
+  subQuestionAnswer(UUID : String,answer_index : number) : Observable<any>{
+    const url = this.QUESTION_BASE_URL + UUID + "/submit?answerId="+answer_index;
+    return this.http.put<any>(url,{"answerId":answer_index});
+  }
+
 }

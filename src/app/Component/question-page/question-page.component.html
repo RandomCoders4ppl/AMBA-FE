@@ -1,28 +1,40 @@
-<section class="View_container flex bg-red-400" [ngStyle]="{'min-height':QuestionPageSize}">
-    <section class="QuestionView bg-red-400 w-1/3 flex flex-col">
+<section class="View_container grid-container bg-blue-700 grid  grid-cols-[30%_70%] overflow-hidden" [ngStyle]="{'height':QuestionPageSize}">
+    <section class="QuestionView bg-red-400 pr-2 pl-2">
 
         <section class="QuestionContainer flex-grow m-3 p-2">
             <div class="ProjectName">{{ProjectName}}</div>
-            <div class="QuestionNumber">{{list_of_question[currentQuestionIndex]?list_of_question[currentQuestionIndex].questionNumber:''}}</div>
-            <div class="QuestionImage"> 
-                <img  src="{{'data:image/png;base64,'+list_of_question[currentQuestionIndex]?.question}}"/>
+            <div class="QuestionNumber">
+                {{list_of_question[currentQuestionIndex]?list_of_question[currentQuestionIndex].questionNumber:''}}
             </div>
-            <div class="QuestionText">{{list_of_question[currentQuestionIndex]?list_of_question[currentQuestionIndex].questionText:''}}</div>
+            <div class="QuestionImage">
+                <img src="{{'data:image/png;base64,'+list_of_question[currentQuestionIndex]?.question}}" />
+            </div>
+            <div class="QuestionText">
+                {{list_of_question[currentQuestionIndex]?list_of_question[currentQuestionIndex].questionText:''}}</div>
         </section>
 
         <section class="navigationContainer flex-grow-0 flex justify-between m-1 mb-2">
             <button mat-raised-button color="accent" type="button" (click)="moveToPrev()">
-                <mat-icon aria-hidden="false" aria-label="PREV BUTTON"  class="!m-0" fontIcon="keyboard_backspace"></mat-icon>
+                <mat-icon aria-hidden="false" aria-label="PREV BUTTON" class="!m-0"
+                    fontIcon="keyboard_backspace"></mat-icon>
             </button>
-            <button  mat-raised-button color="warn" type="button" (click)="moveTONext()">
-                <mat-icon aria-hidden="false" aria-label="NEXT BUTTON" class="!m-0" fontIcon="arrow_right_alt"></mat-icon>
+            <button mat-raised-button color="warn" type="button" (click)="moveTONext()">
+                <mat-icon aria-hidden="false" aria-label="NEXT BUTTON" class="!m-0"
+                    fontIcon="arrow_right_alt"></mat-icon>
             </button>
         </section>
     </section>
-    <section class="nav bg-yellow-300 flex-grow overflow-y-auto grid grid-cols-2 gap-4 grid-auto-rows h-xxl"> 
-        <div *ngFor="let option of list_of_question[currentQuestionIndex]?.options;" class="max-h-[400px] max-w-[400px]">
-            <img  src="{{'data:image/png;base64,'+option.answerImage}}"/>
-            <div>{{option.answer}}</div>
-        </div>
+    <section class="nav p-2 overflow-auto">
+        <form class="h-full w-full" [formGroup]="Answer">
+            <mat-radio-group aria-label="Select an option" formControlName="answerIndex"  (change)="onAnswerChange()">
+            <div class="grid  grid-cols-[repeat(auto-fit,minmax(360px,1fr))] gap-4 m-3">
+                <div *ngFor="let option of list_of_question[currentQuestionIndex]?.options;index as i" class="h-[340px] w-[360px]">
+                    <img src="{{'data:image/png;base64,'+option.answerImage}}" class="object-fill max-w-full max-h-[92%] object-center" />
+                    <mat-radio-button value="{{i}}">{{option.answer}}</mat-radio-button>
+                </div>
+            </div>
+        </mat-radio-group>
+        </form>
     </section>
 </section>
+
