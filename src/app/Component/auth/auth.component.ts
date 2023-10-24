@@ -40,6 +40,7 @@ export class AuthComponent implements OnInit {
   if(this.LoginForm.valid){
     const email  = this.LoginForm.value.User_Email;
     const password = this.LoginForm.value.User_Password;
+    localStorage.removeItem("token")
     this.auth.login(email,password).subscribe(res=> {
       // Save token to local storage
       if(res !== null && res.token!==null){

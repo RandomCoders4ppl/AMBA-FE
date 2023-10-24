@@ -5,8 +5,12 @@ import { inject } from '@angular/core';
 export const RoleGuard: CanActivateFn = (route, state) => {
   const JwtAuth : AuthService = inject(AuthService);
   const router : Router = inject(Router);
-  console.log("Current Route : "+route)
-  if(JwtAuth.isLoggedIn())
+  console.log("Current Route : "+route.url.toString()+" - With Role - "+JwtAuth.getRole())
+  if(route.url.toString().includes('admin',0) && JwtAuth.isLoggedIn() && JwtAuth.getRole()==='USER'){
+     router.navigate([''])
+     return false
+  }
+  else if(JwtAuth.isLoggedIn())
        return true;
   else{
     router.navigate(['/login'])
