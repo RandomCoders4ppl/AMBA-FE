@@ -26,6 +26,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { AuthComponent } from './Component/auth/auth.component';
 import { JwtTokenInterceptor } from './jwt-token.interceptor';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import {MatDialogModule} from '@angular/material/dialog';
+import { PopUpComponent } from './Component/pop-up/pop-up.component';
 
 
 @NgModule({
@@ -38,6 +40,7 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     AdminPageComponent,
     AdminQuestionPageComponent,
     AuthComponent,
+    PopUpComponent,
     
   ],
   imports: [
@@ -58,6 +61,7 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     ReactiveFormsModule,
     FormsModule,
     MatGridListModule,
+    MatDialogModule
   ],
   providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,{provide:HTTP_INTERCEPTORS,useClass:JwtTokenInterceptor,multi:true}],
