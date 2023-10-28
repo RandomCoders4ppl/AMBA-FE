@@ -28,7 +28,14 @@ import { JwtTokenInterceptor } from './jwt-token.interceptor';
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 import {MatDialogModule} from '@angular/material/dialog';
 import { PopUpComponent } from './Component/pop-up/pop-up.component';
+import { UserTableComponent } from './Component/user-table/user-table.component';
+import { HotTableModule } from '@handsontable/angular';
+import { registerAllModules } from 'handsontable/registry';
 
+
+
+// register Handsontable's modules
+registerAllModules();
 
 @NgModule({
   declarations: [
@@ -41,6 +48,7 @@ import { PopUpComponent } from './Component/pop-up/pop-up.component';
     AdminQuestionPageComponent,
     AuthComponent,
     PopUpComponent,
+    UserTableComponent,
     
   ],
   imports: [
@@ -61,7 +69,8 @@ import { PopUpComponent } from './Component/pop-up/pop-up.component';
     ReactiveFormsModule,
     FormsModule,
     MatGridListModule,
-    MatDialogModule
+    MatDialogModule,
+    HotTableModule
   ],
   providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,{provide:HTTP_INTERCEPTORS,useClass:JwtTokenInterceptor,multi:true}],
