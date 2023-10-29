@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Auth } from '../Models/Auth';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private httpclient: HttpClient, private jwtHelper: JwtHelperService) { }
+  constructor(private httpclient: HttpClient, private jwtHelper: JwtHelperService,private router: Router) { }
 
   BASE_URL_AUTH = 'http://localhost:8080/auth/'
 
@@ -35,6 +36,7 @@ export class AuthService {
   public getJwtToken() {
     if (this.isLoggedIn())
       return localStorage.getItem('token');
+    this.router.navigate(["/login"]);
     throw new Error("No Token Found")
   }
 
@@ -54,6 +56,16 @@ export class AuthService {
       const role = decodedToken.roles;
       console.log(role)
       return role[0].authority;
+    }
+    return null;
+  }
+
+  public getEmail(){
+    const jwt = this.getJwtToken()
+    if (jwt != null) {
+      const decodedToken = this.jwtHelper.decodeToken(jwt)
+      const email = decodedToken.sub;
+      return email
     }
     return null;
   }
