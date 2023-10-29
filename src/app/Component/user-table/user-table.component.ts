@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { HotTableRegisterer } from '@handsontable/angular';
 import Handsontable from 'handsontable';
 import { ReportService } from 'src/app/Service/report.service';
@@ -10,7 +10,7 @@ import * as moment from 'moment';
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.css']
 })
-export class UserTableComponent implements OnInit {
+export class UserTableComponent implements AfterViewInit,OnDestroy {
 
   hotRegisterer = new HotTableRegisterer();
   id = 'hotInstance';
@@ -65,12 +65,6 @@ export class UserTableComponent implements OnInit {
         readOnly: true
       },
       {
-        title: 'Change Role',
-        type: 'checkbox',
-        data: 'inStock',
-        className: 'htCenter',
-      },
-      {
         title: 'View All Answer',
         type: 'text',
         data: 'model',
@@ -92,7 +86,7 @@ export class UserTableComponent implements OnInit {
 
   constructor(private reportService: ReportService) { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.reportService.getAdminReport().subscribe(res => { 
       let hot = this.hotRegisterer.getInstance(this.id);
       res.forEach((element :Report) => {
@@ -102,6 +96,10 @@ export class UserTableComponent implements OnInit {
       hot.loadData(this.data)
       hot.render()
       })
+  }
+
+  ngOnDestroy() {
+    this.hotRegisterer.getInstance(this.id).destroy();
   }
 
 }
