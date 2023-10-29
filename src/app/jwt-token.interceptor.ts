@@ -21,9 +21,7 @@ export class JwtTokenInterceptor implements HttpInterceptor {
     if(this.JwtAuth.getExpirationDate()){
       this.router.navigate(["/login"]);
     }
-    
     const JwtReq = request.clone({setHeaders: { 'Authorization': `Bearer ${JwtToken}`}})
-    console.log(JwtReq)
     return next.handle(JwtReq);
     }catch(error){
       return next.handle(request);
