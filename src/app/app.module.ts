@@ -31,6 +31,7 @@ import { PopUpComponent } from './Component/pop-up/pop-up.component';
 import { UserTableComponent } from './Component/user-table/user-table.component';
 import { HotTableModule } from '@handsontable/angular';
 import { registerAllModules } from 'handsontable/registry';
+import { AdminManageComponent } from './Component/admin-manage/admin-manage.component';
 
 
 
@@ -49,6 +50,7 @@ registerAllModules();
     AuthComponent,
     PopUpComponent,
     UserTableComponent,
+    AdminManageComponent,
     
   ],
   imports: [
