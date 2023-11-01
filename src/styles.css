@@ -11,3 +11,17 @@
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Handsontable css its not working if you put it component level*/
+
+.ChangeRoleYes{
+background-color: #ffff00 !important;
+}
+
+.ChangeRoleNo{
+    background-color: #df0dbc !important;
+}
+
+.RipUser{
+    background-color: red !important;
+}
