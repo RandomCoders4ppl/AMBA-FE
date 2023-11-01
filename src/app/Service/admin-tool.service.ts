@@ -20,9 +20,9 @@ export class AdminToolService {
   getUsersByRole(role : string) : Observable<Users[]>{
     return this.http.get<Users[]>(this.BASE_URL_ADMIN+'/getUserByType?role='+role)
   }
-  
-  postChangeRoles(changeRoleList : AdminReqType[]):Observable<AdminReqType[]>{
-   return this.http.post<AdminReqType[]>(this.BASE_URL_ADMIN+'/ChangeRoles',changeRoleList)
+ 
+  postChanges(actionUrl:string,list : AdminReqType[]):Observable<AdminReqType[]>{
+   return this.http.post<AdminReqType[]>(this.BASE_URL_ADMIN+actionUrl,list)
   }
 
 }
