@@ -23,6 +23,7 @@
     "@auth0/angular-jwt": "^5.1.2",
     "@handsontable/angular": "^13.1.0",
     "handsontable": "^13.1.0",
+    "ngx-infinite-scroll": "^16.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
