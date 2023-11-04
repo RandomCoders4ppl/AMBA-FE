@@ -32,6 +32,7 @@ import { UserTableComponent } from './Component/user-table/user-table.component'
 import { HotTableModule } from '@handsontable/angular';
 import { registerAllModules } from 'handsontable/registry';
 import { AdminManageComponent } from './Component/admin-manage/admin-manage.component';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 
 
@@ -72,7 +73,8 @@ registerAllModules();
     FormsModule,
     MatGridListModule,
     MatDialogModule,
-    HotTableModule
+    HotTableModule,
+    InfiniteScrollModule
   ],
   providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,{provide:HTTP_INTERCEPTORS,useClass:JwtTokenInterceptor,multi:true}],
