@@ -25,3 +25,42 @@ background-color: #ffff00 !important;
 .RipUser{
     background-color: red !important;
 }
+
+
+.my-custom-snackbar >  div * {
+    background-color: #333333 !important; 
+    color: #ff4081 !important; 
+    font-weight: bolder !important;
+}
+
+.mdc-snackbar__actions:hover span{
+    background-color: unset !important;
+    border-radius: unset !important;
+}
+.mdc-snackbar__actions:hover .mat-mdc-focus-indicator{
+ background-color: rgba(255, 64, 129, 0.0001) !important;
+ border-radius: 0px !important;
+}
+
+.my-custom-snackbar > *{ 
+padding-right: 0 !important;
+}
+
+.my-custom-snackbar2 >  div * {
+    background-color: #333333 !important; 
+    color: #3fff00 !important; 
+    font-weight: bolder !important;
+}
+
+.my-custom-snackbar2 .mdc-snackbar__actions:hover span{
+    background-color: unset !important;
+    border-radius: unset !important;
+}
+.my-custom-snackbar2 .mdc-snackbar__actions:hover .mat-mdc-focus-indicator{
+ background-color: rgba(63,255,0,.00001) !important;
+ border-radius: 0px !important;
+}
+
+.my-custom-snackbar2 > *{ 
+padding-right: 0 !important;
+}
