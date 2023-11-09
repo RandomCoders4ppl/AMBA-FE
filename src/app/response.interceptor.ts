@@ -21,7 +21,7 @@ export class ResponseInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
         catchError((error: HttpErrorResponse) => {
           console.error('HTTP Error:', error);
-          if(!(error.error as string).includes("Question is already submitted"))
+          if(!JSON.stringify(error.error as string).includes("Question is already submitted"))
           this.snackBar.open('Request Failed','close',{
             duration: 5000,
             horizontalPosition: this.horizontalPosition,
