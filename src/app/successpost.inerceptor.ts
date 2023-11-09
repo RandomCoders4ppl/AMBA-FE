@@ -18,10 +18,10 @@ export class PostSuccessInterceptor implements HttpInterceptor {
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-  intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
         tap(event => {
-          if (event instanceof HttpResponse && req.method === 'POST' || req.method === 'PUT') {
+          if (event instanceof HttpResponse && event.ok && (req.method === 'POST' || req.method === 'PUT')) {
             this.snackBar.open('Successful POST','close',{
                 duration: 5000,
                 horizontalPosition: this.horizontalPosition,
