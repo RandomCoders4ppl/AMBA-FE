@@ -45,6 +45,7 @@ export class AuthComponent implements OnInit {
       // Save token to local storage
       if(res !== null && res.token!==null){
       localStorage.setItem("token",res.token)
+      this.auth.getUser();
       this.router.navigate([""])
       }
     })
