@@ -36,7 +36,9 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { ResponseInterceptor } from './response.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PostSuccessInterceptor } from './successpost.inerceptor';
-
+import { FooterComponent } from './footer/footer.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { ProfileComponent } from './Component/profile/profile.component';
 
 // register Handsontable's modules
 registerAllModules();
@@ -54,6 +56,8 @@ registerAllModules();
     PopUpComponent,
     UserTableComponent,
     AdminManageComponent,
+    FooterComponent,
+    ProfileComponent,
 
   ],
   imports: [
@@ -77,7 +81,8 @@ registerAllModules();
     MatDialogModule,
     HotTableModule,
     InfiniteScrollModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatMenuModule
   ],
   providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService, { provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true },
