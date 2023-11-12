@@ -10,7 +10,8 @@
     box-sizing: border-box;
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: "Roboto",sans-serif;
+-webkit-font-smoothing: antialiased; }
 
 /* Handsontable css its not working if you put it component level*/
 
@@ -63,4 +64,9 @@ padding-right: 0 !important;
 
 .my-custom-snackbar2 > *{ 
 padding-right: 0 !important;
+}
+
+.no-hover-effect
+{
+    --mat-mdc-button-persistent-ripple-color: transparent !important;
 }
