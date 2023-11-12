@@ -1,0 +1,11 @@
+.navContainer{
+    background-color: #010606;
+    z-index: 9999;
+}
+.UserImg{
+    background-image: url('../../../assets/account_circle.svg');
+    background-repeat: no-repeat;
+    background-position: center; 
+    position: relative;
+    background-size:100% 100%;
+}
