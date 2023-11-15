@@ -7,9 +7,11 @@ import { AdminQuestionPageComponent } from './Component/admin-question-page/admi
 import { AuthComponent } from './Component/auth/auth.component';
 import { RoleGuard} from './Ngguard/guard.guard';
 import { AdminManageComponent } from './Component/admin-manage/admin-manage.component';
+import { ProfileComponent } from './Component/profile/profile.component';
 
 const routes: Routes = [
   {path:'project/:id',component:QuestionPageComponent,canActivate:[RoleGuard]},
+  {path:'userProfile',component:ProfileComponent,canActivate:[RoleGuard]},
   {path:'admin',component:AdminPageComponent,canActivate:[RoleGuard]},
   {path:'admin/questions',component:AdminQuestionPageComponent,canActivate:[RoleGuard]},
   {path:"admin/managetool",component:AdminManageComponent,canActivate:[RoleGuard]},

@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Auth } from '../Models/Auth';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { User } from '../Models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,10 @@ export class AuthService {
   BASE_URL_AUTH = 'http://localhost:8080/auth/'
 
   public UserAuth!: Auth
+  
+  public userSubj = new BehaviorSubject<User>({} as User);
 
+  public User :User = {} as User;
 
   public login(email: string, password: string): Observable<any> {
     const headers = new HttpHeaders()
@@ -43,10 +47,15 @@ export class AuthService {
   public getExpirationDate(): boolean {
     const jwt = this.getJwtToken()
     if (jwt != null) {
-      console.log(this.jwtHelper.getTokenExpirationDate(jwt))
       return this.jwtHelper.isTokenExpired(jwt);
     }
+    localStorage.removeItem('token');
+    this.router.navigate(["/login"]);
     return true;
+  }
+
+  public toLoginPage(){
+    this.router.navigate(["/login"]);
   }
 
   public getRole() {
@@ -54,10 +63,22 @@ export class AuthService {
     if (jwt != null) {
       const decodedToken = this.jwtHelper.decodeToken(jwt)
       const role = decodedToken.roles;
-      console.log(role)
       return role[0].authority;
     }
     return null;
+  }
+
+  public getUser() :Observable<User> {
+    const jwt = this.getJwtToken()
+    if (jwt != null) {
+      const decodedToken = this.jwtHelper.decodeToken(jwt)
+      this.User.name = decodedToken.name;
+      this.User.emial = decodedToken.sub;
+      this.User.role = this.getRole();
+      console.log("User Name : "+this.User.emial+" And Name : "+this.User.name+" role : "+this.User.role)
+      this.userSubj.next(this.User)
+    }
+    return this.userSubj.asObservable();
   }
 
   public getEmail(){
@@ -70,4 +91,12 @@ export class AuthService {
     return null;
   }
 
+  clear() {
+    localStorage.removeItem('token')
+    this.router.navigate(["/login"]);
+  }
+
+  toProfilePage() {
+   this.router.navigate(["/userProfile"]);
+  }
 }
