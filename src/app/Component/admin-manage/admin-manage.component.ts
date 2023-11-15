@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { HotTableRegisterer } from '@handsontable/angular';
 import Handsontable from 'handsontable';
 import { CellChange, ChangeSource } from 'handsontable/common';
+import { error } from 'handsontable/helpers';
 import { AdminReqType } from 'src/app/Models/AdminReqType';
 import { Users } from 'src/app/Models/Users';
 import { AdminToolService } from 'src/app/Service/admin-tool.service';
@@ -18,6 +19,11 @@ export class AdminManageComponent implements AfterViewInit, OnDestroy {
   hotRegisterer = new HotTableRegisterer()
   mt_id = 'hotInstance-user';
   data: Users[] = []
+
+  AdminPage = 0;
+  UserPage = 0 ;
+  AdminStop = false;
+  UserStop = false;
 
   mtHotSettings: Handsontable.GridSettings = {
     data: this.data,
@@ -58,14 +64,21 @@ export class AdminManageComponent implements AfterViewInit, OnDestroy {
         data: 'deleteUser',
       }
     ],
+      rowHeaders: true,
     colHeaders: true,
     filters: true,
     dropdownMenu: true,
-    height: 'auto',
-    hiddenColumns: {
-      columns: [0],
-      indicators: true
-    },
+    rowHeights: 50,
+    height: 400,
+    stretchH: 'all',
+    fixedColumnsLeft: 3,
+    manualColumnResize: true,
+    manualRowResize: true,
+    contextMenu: true,
+    viewportColumnRenderingOffset: 10,
+    manualColumnMove: true,
+    manualRowMove: true,
+    autoWrapRow: true,
     licenseKey: 'non-commercial-and-evaluation',
     afterChange: (changes, src) => {
       if (changes)
@@ -84,7 +97,10 @@ export class AdminManageComponent implements AfterViewInit, OnDestroy {
         //ele.changeRole = "<button onclick='onChangeRole()' type='button'> Make Admin</button>"
         this.data.push(ele)
       })
+      this.UserPage++;
       hot.updateData(this.data)
+    },error=>{
+      if(this.stopApiCall(error)) this.UserStop = true
     })
     this.adminTool.getUsersByRole('ADMIN').subscribe(res => {
       res.forEach(ele => {
@@ -92,9 +108,43 @@ export class AdminManageComponent implements AfterViewInit, OnDestroy {
         //ele.changeRole = "<button onclick='onChangeRole()' type='button'> Make User</button>"
         this.data.push(ele)
       })
+      this.AdminPage++
       hot.updateData(this.data)
+    },error=>{
+      if(this.stopApiCall(error)) this.AdminStop = true
     })
     hot.render()
+
+    hot.addHook('afterScrollVertically', () => {
+      const element = document.getElementsByClassName('wtHolder')[0]
+      if (element) {
+        if (element.scrollTop + element.clientHeight >= element.scrollHeight -50) {
+          if(!this.UserStop)
+          this.adminTool.getUsersByRole('USER',this.UserPage++).subscribe(res => {
+            res.forEach(ele => {
+              ele.role = "USER"
+              this.data.push(ele)
+            })
+            hot.updateData(this.data)
+          },
+          error=>{
+            if(this.stopApiCall(error)) this.UserStop = true
+          })
+          if(!this.AdminStop)
+          this.adminTool.getUsersByRole('ADMIN',this.AdminPage++).subscribe(res => {
+            res.forEach(ele => {
+              ele.role = "ADMIN"
+              this.data.push(ele)
+            })
+            hot.updateData(this.data)
+          },error=>{
+            if(this.stopApiCall(error)) this.AdminStop = true
+          })
+          hot.render()
+        }
+      }
+    }
+    )
   }
 
 
@@ -183,6 +233,14 @@ export class AdminManageComponent implements AfterViewInit, OnDestroy {
       instance.setCellMeta(rowIndex, i, 'className', CssClassName);
     }
     instance.render()
+  }
+
+
+  stopApiCall(errors:any):boolean{
+    if(errors.status == 400 && (errors.error.error as string).startsWith("No more User found with Role ")){
+      return true;      
+    }
+    return false;
   }
 
 

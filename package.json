@@ -23,7 +23,6 @@
     "@auth0/angular-jwt": "^5.1.2",
     "@handsontable/angular": "^13.1.0",
     "handsontable": "^13.1.0",
-    "moment": "^2.29.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
