@@ -1,15 +1,21 @@
 <section class="navbar" #matNavbar>
-  <mat-toolbar>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span>My App</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
+  <mat-toolbar class="navContainer fixed top-0 w-full flex justify-between">
+    <div>
+      <span class="text-xl">AMBA</span>
+    </div>
+    <div>
+      <button mat-button class="no-hover-effect" [matMenuTriggerFor]="menu">
+        <div class="IMGContainer rounded-full transition ease-in-out delay-150 hover:scale-110
+     hover:!bg-gradient-to-r from-purple-500 to-pink-500 bg-opacity-100">
+          <div class="h-8 w-8 rounded-full UserImg"></div>
+        </div>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item disabled class="truncate overflow-ellipsis">{{name}}</button>
+        <button mat-menu-item (click)="Profile()">Profile</button>
+        <button mat-menu-item (click)="LogIn()">Log In</button>
+        <button mat-menu-item (click)="LogOut()">Log Out</button>
+      </mat-menu>
+    </div>
   </mat-toolbar>
 </section>

@@ -1,0 +1,29 @@
+<section class="footer bg-[#010606] w-full min-h-[240px] flex justify-center items-center dark:text-white overflow-hidden">
+    <footer class="py-12 px-6 m-auto flex flex-col">
+        <div class="foot-text flex flex-row justify-center items-center text-center">
+            <div class="m-4 p-1 w-40">
+               <div class="foot-header font-extrabold">About Us</div> 
+               <div *ngFor="let i of aboutUS"><a  target="_blank" class="text-clip text-center"  href={{i.link}}>{{i.text}}</a></div>
+            </div>
+            <div  class="m-4 p-1 w-40">
+                <div class="foot-header font-extrabold">Contact Us</div> 
+                <div *ngFor="let i of aboutUS"><a  target="_blank" class="text-clip text-center"  href={{i.link}}>{{i.text}}</a></div>
+            </div>
+            <div  class="m-4 p-1 w-40">
+                <div class="foot-header font-extrabold">Projects</div> 
+                <div *ngFor="let i of aboutUS"><a  target="_blank" class="text-clip text-center"  href={{i.link}}>{{i.text}}</a></div>
+            </div>
+        </div>
+        <div class="border-t-4 border-white w-full flex justify-between items-center">
+            <div class="text-2xl font-bold">
+                      AMBA
+            </div>
+            <div>
+                <img src="../../assets/home_app_logo.svg" alt="Home IMAGE">
+            </div>
+      </div>
+      <div class="text-center">
+         © {{date}} AMBA 
+      </div>
+    </footer>
+</section>
