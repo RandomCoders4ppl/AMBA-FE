@@ -1,0 +1,13 @@
+.input{
+    color: black;
+}
+.addQuestion{
+    width:700px;
+    left: 50px;
+}
+.questionAdded{
+  position:absolute;
+  width:500px;
+  background-color:lightblue;
+  right: 50px;
+}

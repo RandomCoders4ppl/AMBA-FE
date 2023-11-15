@@ -32,6 +32,7 @@ import { UserTableComponent } from './Component/user-table/user-table.component'
 import { HotTableModule } from '@handsontable/angular';
 import { registerAllModules } from 'handsontable/registry';
 import { AdminManageComponent } from './Component/admin-manage/admin-manage.component';
+import {MatTableModule} from '@angular/material/table';
 
 
 
@@ -50,8 +51,7 @@ registerAllModules();
     AuthComponent,
     PopUpComponent,
     UserTableComponent,
-    AdminManageComponent,
-    
+    AdminManageComponent,    
   ],
   imports: [
     BrowserModule,
@@ -64,6 +64,7 @@ registerAllModules();
     MatCardModule,
     MatExpansionModule,
     MatInputModule,
+    MatTableModule,
     MatFormFieldModule,
     MatSelectModule,
     MatRadioModule,

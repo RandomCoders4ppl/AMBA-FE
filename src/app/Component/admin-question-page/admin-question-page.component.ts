@@ -35,6 +35,17 @@ export class AdminQuestionPageComponent implements OnInit{
       answer_id :new FormControl(null,Validators.required),
     })
   }
+  newQuestion = true; 
+  bulkUpload = false; 
+     
+ DisplayDiv() {  
+    this.newQuestion = true; 
+    this.bulkUpload = false;  
+  }  
+  DisplayDiv2() {  
+    this.newQuestion = false; 
+    this.bulkUpload = true;   
+  }  
   
 
   onSubmit(){
@@ -66,7 +77,8 @@ export class AdminQuestionPageComponent implements OnInit{
     if (file) {
       this.form.get('QuestionImage')?.setValue(file)
     }
-  } 
+  }
+
 
   setOptionImageFile(event : Event,index :number){
     const inputElement = event.target as HTMLInputElement;
@@ -78,6 +90,8 @@ export class AdminQuestionPageComponent implements OnInit{
     }
 
   }
+
+  
   
 
   convertFileToBase64(file: File): Promise<string> {
