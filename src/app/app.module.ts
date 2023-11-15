@@ -63,7 +63,6 @@ registerAllModules();
     MatCardModule,
     MatExpansionModule,
     MatInputModule,
-    MatTableModule,
     MatFormFieldModule,
     MatSelectModule,
     MatRadioModule,
@@ -73,7 +72,6 @@ registerAllModules();
     MatGridListModule,
     MatDialogModule,
     HotTableModule,
-    InfiniteScrollModule
   ],
   providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,{provide:HTTP_INTERCEPTORS,useClass:JwtTokenInterceptor,multi:true}],
