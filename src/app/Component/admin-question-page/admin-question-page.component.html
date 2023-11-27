@@ -5,9 +5,7 @@
   <link rel="stylesheet" href="./admin-question-page.component.css">
 
 </head>
-<body> 
-    <div id="bg"></div>
-    <mat-toolbar class="!rounded-none !bg-black-300">
+    <mat-toolbar class="!rounded-none !bg-black-300" id="toolbar">
         <a mat-button (click)=DisplayDiv()>ADD NEW QUESTION</a>
         <a mat-button (click)=DisplayDiv2()>BULK UPLOAD</a>
     </mat-toolbar>
@@ -16,25 +14,20 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form-field">
                 <label>Select Project</label><br>
-                <select Name="NewProjectType" >
+                <select formControlName="projectId" >
                     <option value="" disabled selected>Select Project</option>
                     <option *ngFor="let project of projects" value="{{project.id}}">{{project.projectName}}</option>
                 </select>
-                
-            </div>  
-            <div class="form-field">
                 <input type="text" placeholder="Question Text" class="text-red-950"  formControlName="questionText">
                 <input class="ng-hide" id="input-file-id" type="file"  (change)="setQuestionFile($event)"/>
                 </div>
-                <div class="form-field">
                 <section>
                 <div class="example-label">Add Options</div>
                 <div class="example-button-row">
                 <div class="example-button-container">
-                               </div>
+                </div>
                 </div>
             </section>
-            </div>
             <div formArrayName="Options" >
                 <section *ngFor="let option of getAllOptions;let i=index" [formGroupName]="i">
                   <input type="text" placeholder="Options name" class="text-red-950"  formControlName="answer" >
@@ -43,23 +36,24 @@
                   <input type="radio" value="{{i}}" name="answer_index"  [(ngModel)] = "answer_index" [ngModelOptions]="{standalone: true}" >
                 </section>
              </div> 
-             <input type="text" placeholder="Question Text" class="button"  formControlName="questionText" (click)="addOption()">     
+             <input type="text" placeholder="Question Text" class="button"  (click)="addOption()">  
+             <section>
+                <button type="submit" id="submit">SUBMIT</button>
+              </section>   
     </form>
-    <div class="questionAdded">
-        <p>Questions added</p>  
-        <li class = "input" *ngFor="let project of projects">{{project.projectName}}
-    </div>
+
 </div>
+
 
 <div *ngIf="bulkUpload">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-field">
-            <select Name="NewProjectType" >
-                <option value="" disabled selected>Select Project</option>
-                <option *ngFor="let project of projects" value="{{project.id}}">{{project.projectName}}</option>
-            </select>
-            <label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
-            <a href="my_file.xlsx" download="my_file.xlsx">Download File</a>
+            <div class="downloadBox">  
+            <button (click)="downloadExcel()" style="padding: 50px 70px;"> Click To Download Template</button><br>
+            <Label style="padding: 60px 90px;">Upload File Here</Label><br>
+            <button  class="downloadButton"> Choose File</button>
+        </div>
+
         </div>  
         </form>
 </div>

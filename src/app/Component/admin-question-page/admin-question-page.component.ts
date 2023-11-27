@@ -3,6 +3,7 @@ import {FormBuilder,FormControl,Validators,FormGroup, FormArray} from '@angular/
 import { Observable, ReplaySubject } from 'rxjs';
 import { Answer } from 'src/app/Models/answer';
 import { Project } from 'src/app/Models/project';
+import { Question } from 'src/app/Models/question';
 import { ProjectCardService } from 'src/app/Service/Shared/project-cards/project-card.service';
 import { QuestionService } from 'src/app/Service/question.service';
 
@@ -16,6 +17,7 @@ export class AdminQuestionPageComponent implements OnInit{
 
   
   projects : Project[] = [];
+  question : Question[] = [];
 
 
   answer_index : String = '';
@@ -60,6 +62,7 @@ export class AdminQuestionPageComponent implements OnInit{
     formData.append('answer_id', this.form.value.answer_id);
     this.questionService.postNewQuestion("http://localhost:8080/Question/new",formData)
     .subscribe(res=> console.log(res));
+    console.log(this.projects)
     
   }
 
@@ -90,8 +93,15 @@ export class AdminQuestionPageComponent implements OnInit{
     }
 
   }
-
-  
+  downloadExcel() {
+    let link = document.createElement('a');
+    link.setAttribute('type', 'hidden');
+    link.href = '/assets/excelFileName.xlsx';
+    link.download = 'excelFileNam.xlsx';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+}
   
 
   convertFileToBase64(file: File): Promise<string> {

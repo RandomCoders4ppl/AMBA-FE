@@ -11,3 +11,17 @@
   background-color:lightblue;
   right: 50px;
 }
+.downloadButton{
+  padding-left: 120px;
+}
+.downloadBox{
+  width: 300px;
+  height: 200px;
+  background-color: #9b9e9d;
+  margin: 200px 600px;
+
+ 
+}
+#toolbar{
+  margin-top: 60px;
+}
