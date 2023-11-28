@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+ 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,17 +32,16 @@ import { UserTableComponent } from './Component/user-table/user-table.component'
 import { HotTableModule } from '@handsontable/angular';
 import { registerAllModules } from 'handsontable/registry';
 import { AdminManageComponent } from './Component/admin-manage/admin-manage.component';
-import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { ResponseInterceptor } from './response.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PostSuccessInterceptor } from './successpost.inerceptor';
 import { FooterComponent } from './footer/footer.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { ProfileComponent } from './Component/profile/profile.component';
-
+ 
 // register Handsontable's modules
 registerAllModules();
-
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +57,7 @@ registerAllModules();
     AdminManageComponent,
     FooterComponent,
     ProfileComponent,
-
+ 
   ],
   imports: [
     BrowserModule,
@@ -80,7 +79,6 @@ registerAllModules();
     MatGridListModule,
     MatDialogModule,
     HotTableModule,
-    InfiniteScrollModule,
     MatSnackBarModule,
     MatMenuModule
   ],

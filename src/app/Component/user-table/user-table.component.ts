@@ -5,6 +5,7 @@ import { ReportService } from 'src/app/Service/report.service';
 import { Report } from '../../Models/report';
 import * as moment from 'moment';
 
+
 @Component({
   selector: 'app-user-table',
   templateUrl: './user-table.component.html',

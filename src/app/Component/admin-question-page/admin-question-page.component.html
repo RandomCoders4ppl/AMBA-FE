@@ -1,42 +1,62 @@
-<mat-expansion-panel class="!rounded-none !bg-orange-300">
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      Question
-    </mat-panel-title>
-    <mat-panel-description>
-      Add New
-    </mat-panel-description>
-  </mat-expansion-panel-header>
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-form-field>
-      <mat-label>Select</mat-label>
-      <mat-select formControlName="projectId">
-        <mat-option *ngFor="let project of projects" value="{{project.id}}">{{project.projectName}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <input class="ng-hide" id="input-file-id" type="file"  (change)="setQuestionFile($event)"/>
-    <input type="text" placeholder="Question Text" class="text-red-950"  formControlName="questionText">
-    <label for="input-file-id" class="md-button md-raised md-primary">Choose Files</label>
-    <section>
-      <div class="example-label">Add Options</div>
-      <div class="example-button-row">
-        <div class="example-button-container">
-          <button type="button" mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon" (click)="addOption()">
-            <mat-icon>plus_one</mat-icon>
-          </button>
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./admin-question-page.component.css">
+
+</head>
+    <mat-toolbar class="!rounded-none !bg-black-300" id="toolbar">
+        <a mat-button (click)=DisplayDiv()>ADD NEW QUESTION</a>
+        <a mat-button (click)=DisplayDiv2()>BULK UPLOAD</a>
+    </mat-toolbar>
+   
+<div *ngIf="newQuestion" class = "addQuestion">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-field">
+                <label>Select Project</label><br>
+                <select formControlName="projectId" >
+                    <option value="" disabled selected>Select Project</option>
+                    <option *ngFor="let project of projects" value="{{project.id}}">{{project.projectName}}</option>
+                </select>
+                <input type="text" placeholder="Question Text" class="text-red-950"  formControlName="questionText">
+                <input class="ng-hide" id="input-file-id" type="file"  (change)="setQuestionFile($event)"/>
+                </div>
+                <section>
+                <div class="example-label">Add Options</div>
+                <div class="example-button-row">
+                <div class="example-button-container">
+                </div>
+                </div>
+            </section>
+            <div formArrayName="Options" >
+                <section *ngFor="let option of getAllOptions;let i=index" [formGroupName]="i">
+                  <input type="text" placeholder="Options name" class="text-red-950"  formControlName="answer" >
+                  <input class="ng-hide" id="input-file-id" type="file"  (change)="setOptionImageFile($event,i)"/>
+                  <label for="input-file-id" class="md-button md-raised md-primary">Correct answer</label>
+                  <input type="radio" value="{{i}}" name="answer_index"  [(ngModel)] = "answer_index" [ngModelOptions]="{standalone: true}" >
+                </section>
+             </div> 
+             <input type="text" placeholder="Question Text" class="button"  (click)="addOption()">  
+             <section>
+                <button type="submit" id="submit">SUBMIT</button>
+              </section>   
+    </form>
+
+</div>
+
+
+<div *ngIf="bulkUpload">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-field">
+            <div class="downloadBox">  
+            <button (click)="downloadExcel()" style="padding: 50px 70px;"> Click To Download Template</button><br>
+            <Label style="padding: 60px 90px;">Upload File Here</Label><br>
+            <button  class="downloadButton"> Choose File</button>
         </div>
-      </div>
-    </section>
-    <div formArrayName="Options">
-      <section *ngFor="let option of getAllOptions;let i=index" [formGroupName]="i">
-        <input type="text" placeholder="Options name" class="text-red-950"  formControlName="answer">
-        <input class="ng-hide" id="input-file-id" type="file"  (change)="setOptionImageFile($event,i)"/>
-        <label for="input-file-id" class="md-button md-raised md-primary">Upload Question Image</label>
-        <input type="radio" value="{{i}}" name="answer_index"  [(ngModel)] = "answer_index" [ngModelOptions]="{standalone: true}" >
-      </section>
-   </div>
-    <section>
-      <button type="submit" id="submit">SUBMIT</button>
-    </section>
-  </form>
-</mat-expansion-panel>
+
+        </div>  
+        </form>
+</div>
+
+
+

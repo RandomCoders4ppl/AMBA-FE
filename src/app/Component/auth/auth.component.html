@@ -1,60 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="./auth.component.css">
+
+</head>
+<body>
 <section class="User_Registeration" *ngIf="!NewUser">
-    <mat-card class="!rounded-none">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Login In</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <form [formGroup]="LoginForm">
-                <mat-form-field>
-                    <mat-label>Email</mat-label>
-                    <input type="email" matInput placeholder="abc@gmail.com" formControlName="User_Email" />
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>password</mat-label>
-                    <input type="password" matInput formControlName="User_Password" />
-                </mat-form-field>
+<!-- partial:index.partial.html -->
+<div id="bg"></div>
 
-                <button mat-button (click)="LogIn()">Log In</button>
 
-            </form>
-        </mat-card-content>
-
-        <mat-card-actions>
-            <p>New User </p>
-            <button mat-button (click)="setNewUser(true)">Sign Up</button>
-        </mat-card-actions>
-    </mat-card>
+<form [formGroup]="LoginForm">
+  <div class="form-field">
+    <input type="email" placeholder="Email" formControlName="User_Email" required/>
+  </div>
+  
+  <div class="form-field">
+    <input type="password" placeholder="Password" formControlName="User_Password" required/>                         
+  </div>
+  
+  <div class="form-field">
+    <button class="btn" (click)="LogIn()">Log In </button>
+  </div>
+  <div class="form-field">
+    <button class="btn" (click)="setNewUser(true)">SignUp</button>
+  </div>
+</form>
+<!-- partial -->
 </section>
 
 <section class="User_Login" *ngIf="NewUser">
-    <mat-card class="!rounded-none">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Sign Up</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <form [formGroup]="SignUp">
-                <mat-form-field>
-                    <mat-label>Name</mat-label>
-                    <input type="text" matInput placeholder="Naveen M" formControlName="Name" />
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Email</mat-label>
-                    <input type="email" matInput placeholder="abc@gmail.com" formControlName="User_Email" />
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>password</mat-label>
-                    <input type="password" matInput formControlName="User_Password" />
-                </mat-form-field>
+    <div id="bg"></div>
+<form [formGroup]="SignUp">
+    <div class="form-field">
+        <input type="text" placeholder="UserName" formControlName="Name" required/>                         
+      </div>
 
-                <button mat-button (click)="RegNewUser()">Register</button>
-            </form>
-        </mat-card-content>
+    <div class="form-field">
+      <input type="email" placeholder="Email" formControlName="User_Email" required/>
+    </div>
+    
+    <div class="form-field">
+      <input type="password" placeholder="Password" formControlName="User_Password" required/>                         
+    </div>
 
-        <mat-card-actions>
-            <p>Already existing User</p>
-            <button mat-button (click)="setNewUser(false)">Log In</button>
-        </mat-card-actions>
-    </mat-card>
+    <div class="form-field">
+    <button class="btn" (click)="RegNewUser()">Register</button>
+    </div>
+
+    <div class="form-field">
+        <button class="btn" (click)="setNewUser(false)">Back to Login</button>
+        </div>
+  </form>
 </section>
+
+  
+</body>
+</html>
