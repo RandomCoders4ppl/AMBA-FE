@@ -15,7 +15,7 @@
         </div>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item disabled class="truncate overflow-ellipsis">{{name}}</button>
+        <button mat-menu-item disabled *ngIf="name" class="truncate overflow-ellipsis">{{name}}</button>
         <button *ngIf="admin" mat-menu-item >Admin</button>
         <button mat-menu-item *ngIf="email || name" (click)="Profile()">Profile</button>
         <button mat-menu-item (click)="LogIn()">Log In</button>
