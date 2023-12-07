@@ -96,8 +96,8 @@ export class AdminQuestionPageComponent implements OnInit{
   downloadExcel() {
     let link = document.createElement('a');
     link.setAttribute('type', 'hidden');
-    link.href = '/assets/excelFileName.xlsx';
-    link.download = 'excelFileNam.xlsx';
+    link.href = '/assets/Question.docx';
+    link.download = 'Question.docx';
     document.body.appendChild(link);
     link.click();
     link.remove();
