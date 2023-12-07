@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterContentChecked, AfterViewInit, Component, DestroyRef, DoCheck, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { User } from 'src/app/Models/User';
 import { AuthService } from 'src/app/Service/auth.service';
 import { NavbarService } from 'src/app/Service/navbar.service';
@@ -16,6 +16,7 @@ export class NavBarComponent implements OnInit,AfterViewInit{
   
   name: string = '';
   email:string = '';
+  admin:boolean = false;
     
   @ViewChild('matNavbar', { static: true })
   matNavbar!: ElementRef ;
@@ -23,7 +24,8 @@ export class NavBarComponent implements OnInit,AfterViewInit{
   ngOnInit(): void {
     this.auth.getUser().subscribe(user=>{
       this.name=user.name;
-      this.email=user.name;
+      this.email=user.email;
+      this.admin = (user.role as string).toUpperCase()==="ADMIN"?true:false;
     })
   }
 
@@ -35,6 +37,9 @@ export class NavBarComponent implements OnInit,AfterViewInit{
   }
 
   LogOut() {
+    this.email = "";
+    this.name = "";
+    this.admin = false;
     this.auth.clear()
   }
 
