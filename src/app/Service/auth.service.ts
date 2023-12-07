@@ -11,15 +11,15 @@ import { User } from '../Models/User';
 })
 export class AuthService {
 
-  constructor(private httpclient: HttpClient, private jwtHelper: JwtHelperService,private router: Router) { }
+  constructor(private httpclient: HttpClient, private jwtHelper: JwtHelperService, private router: Router) { }
 
   BASE_URL_AUTH = 'http://localhost:8080/auth/'
 
   public UserAuth!: Auth
-  
+
   public userSubj = new BehaviorSubject<User>({} as User);
 
-  public User :User = {} as User;
+  public User: User = {} as User;
 
   public login(email: string, password: string): Observable<any> {
     const headers = new HttpHeaders()
@@ -54,7 +54,7 @@ export class AuthService {
     return true;
   }
 
-  public toLoginPage(){
+  public toLoginPage() {
     this.router.navigate(["/login"]);
   }
 
@@ -68,20 +68,24 @@ export class AuthService {
     return null;
   }
 
-  public getUser() :Observable<User> {
-    const jwt = this.getJwtToken()
-    if (jwt != null) {
-      const decodedToken = this.jwtHelper.decodeToken(jwt)
-      this.User.name = decodedToken.name;
-      this.User.emial = decodedToken.sub;
-      this.User.role = this.getRole();
-      console.log("User Name : "+this.User.emial+" And Name : "+this.User.name+" role : "+this.User.role)
-      this.userSubj.next(this.User)
+  public getUser(): Observable<User> {
+    try {
+      const jwt = this.getJwtToken()
+      if (jwt != null) {
+        const decodedToken = this.jwtHelper.decodeToken(jwt)
+        this.User.name = decodedToken.name;
+        this.User.email = decodedToken.sub;
+        this.User.role = this.getRole();
+        console.log("User Name : " + this.User.email + " And Name : " + this.User.name + " role : " + this.User.role)
+      }
+    }catch(e ){
+      
     }
+    this.userSubj.next(this.User)
     return this.userSubj.asObservable();
   }
 
-  public getEmail(){
+  public getEmail() {
     const jwt = this.getJwtToken()
     if (jwt != null) {
       const decodedToken = this.jwtHelper.decodeToken(jwt)
@@ -97,6 +101,6 @@ export class AuthService {
   }
 
   toProfilePage() {
-   this.router.navigate(["/userProfile"]);
+    this.router.navigate(["/userProfile"]);
   }
 }
