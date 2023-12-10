@@ -70,3 +70,5 @@ padding-right: 0 !important;
 {
     --mat-mdc-button-persistent-ripple-color: transparent !important;
 }
+.mat-expansion-indicator::after{ border-color: #797979 !important;
+    border-width: 0 3px 3px 0 !important;}

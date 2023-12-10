@@ -19,7 +19,9 @@ export class ProjectTypesService {
   
   saveNewProjectType(pType  : String):Observable<any>{
     const URL = this.TYPES_BASE_URL + "/new"
-    return this.http.post<any>(URL,pType);
+    return this.http.post(URL,pType,{
+      responseType: 'text'
+    });
   }
 
 }

@@ -15,7 +15,7 @@ export class ProjectService {
     const URL = this.PROEJCT_BASE_URL + "/new"
     const headers  =  new HttpHeaders()
     headers.set('content-type', 'multipart/form-data')
-    return this.http.post<any>(URL,project,{headers:headers});
+    return this.http.post(URL,project,{headers:headers,responseType:'text'});
   }
 
 }

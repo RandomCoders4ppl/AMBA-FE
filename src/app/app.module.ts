@@ -38,7 +38,11 @@ import { PostSuccessInterceptor } from './successpost.inerceptor';
 import { FooterComponent } from './footer/footer.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { ProfileComponent } from './Component/profile/profile.component';
- 
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatDividerModule} from '@angular/material/divider';
+import { MassiveQuestionUploadStatusComponent } from './Component/massive-question-upload-status/massive-question-upload-status.component';
+import {MatChipsModule} from '@angular/material/chips';
+
 // register Handsontable's modules
 registerAllModules();
  
@@ -57,6 +61,7 @@ registerAllModules();
     AdminManageComponent,
     FooterComponent,
     ProfileComponent,
+    MassiveQuestionUploadStatusComponent,
  
   ],
   imports: [
@@ -80,7 +85,10 @@ registerAllModules();
     MatDialogModule,
     HotTableModule,
     MatSnackBarModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressBarModule,
+    MatDividerModule,
+    MatChipsModule
   ],
   providers: [{ provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService, { provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true },
