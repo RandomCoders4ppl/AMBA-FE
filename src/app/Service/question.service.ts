@@ -39,4 +39,14 @@ export class QuestionService {
 
     return this.http.post(url, form, { headers: headers, responseType: "blob" });
   }
+
+  getUploadStatus():Observable<any>{
+    const url = "http://localhost:8080/admin/massiveUpload/status"
+    return this.http.get<any>(url);
+  }
+
+  downloadRespDocument(uploadID:number):Observable<any>{
+    const url = "http://localhost:8080/admin/downloadFile?id="+uploadID;
+    return this.http.get(url,{responseType: "blob"});
+  }
 }
