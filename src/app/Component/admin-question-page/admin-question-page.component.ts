@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators, FormGroup, FormArray } from '@angular/forms';
+import { MatChipListboxChange } from '@angular/material/chips';
+import * as moment from 'moment';
 import { Observable, ReplaySubject } from 'rxjs';
 import { Answer } from 'src/app/Models/answer';
 import { Project } from 'src/app/Models/project';
@@ -24,6 +26,8 @@ export class AdminQuestionPageComponent implements OnInit {
   form!: FormGroup;
 
   question_added: any = [];
+
+  massive_upload:any = [];
 
 
   constructor(private formBuilder: FormBuilder, private projectService: ProjectCardService, private questionService: QuestionService, private cd: ChangeDetectorRef) { }
@@ -52,6 +56,7 @@ export class AdminQuestionPageComponent implements OnInit {
 
 
   onSubmit() {
+    console.log(this.answer_index)
     if (this.answer_index && this.form.value.projectId && this.form.value.QuestionImage && this.form.value.questionText && this.form.value.Options) {
       this.form.controls['answer_id'].setValue(this.answer_index)
       // before this need tto validate values 
@@ -143,6 +148,18 @@ export class AdminQuestionPageComponent implements OnInit {
     if (file && file?.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
       this.questionService.uploadQuestions(file).subscribe(res => console.log(res))
     }
+  }
+
+  onAnswerSelect(event: MatChipListboxChange){
+    if(event.source)this.answer_index = event.value;
+  }
+
+  onOpen(){
+    this.massive_upload = [];
+    this.questionService.getUploadStatus().subscribe(res=> {
+      res.forEach((ele:any)=>ele.dateTime=moment(ele.dateTime).format('DD/MM/YYYY h:mm A').toString())
+      this.massive_upload.push(...res)
+    })
   }
 
 }
