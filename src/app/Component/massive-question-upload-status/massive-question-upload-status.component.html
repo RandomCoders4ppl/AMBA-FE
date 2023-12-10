@@ -1,0 +1,25 @@
+<mat-card  class="mqu w-[280px] !bg-[#f5f5f5] !text-[#797979] rounded-lg mx-5">
+  <div class="flex justify-between p-2 pb-0 !items-center">
+    <div class="!font-extrabold uppercase"><b>Upload at</b></div>
+    <mat-chip disabled class="">{{uploadDateTime}}</mat-chip>
+  </div>
+  <mat-card-content class="!p-2">
+    <mat-divider ></mat-divider>
+    <p class="uppercase">Upload ID : {{uploadID}}</p>
+    <mat-divider></mat-divider>
+    <div class="flex justify-center">
+      <label [htmlFor]="'download_'+uploadID"><img class="!cursor-pointer" src="../../../assets/download.svg" alt="download result docx." /></label>
+      <button (click)="downloadRespDocument()" [id]="'download_'+uploadID" type="button">Click To Download </button> 
+    </div>
+  
+     
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button class="!text-[#797979]" class="!bg-[#ff4081] mr-2">STATUS : </button>
+    <button mat-button class="!text-[#797979]" class="!bg-[#ff4081]">{{uploadStatus}}</button>
+  </mat-card-actions>
+  <mat-card-footer>
+    <mat-progress-bar mode="indeterminate" class="bg-gray-900"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>
+  
