@@ -37,17 +37,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PostSuccessInterceptor } from './successpost.inerceptor';
 import { FooterComponent } from './footer/footer.component';
 import {MatMenuModule} from '@angular/material/menu';
-import { ProfileComponent } from './Component/profile/profile.component';
-<<<<<<< HEAD
-import { PopUpHappyComponent } from './pop-up-happy/pop-up-happy.component';
- 
-=======
+import {ProfileComponent} from './Component/profile/profile.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDividerModule} from '@angular/material/divider';
 import { MassiveQuestionUploadStatusComponent } from './Component/massive-question-upload-status/massive-question-upload-status.component';
 import {MatChipsModule} from '@angular/material/chips';
-
->>>>>>> f0693f539cd0858cbd50178a27fda9ce6fc688e9
+import { PopUpHappyComponent } from './pop-up-happy/pop-up-happy.component';
 // register Handsontable's modules
 registerAllModules();
  
@@ -66,11 +61,8 @@ registerAllModules();
     AdminManageComponent,
     FooterComponent,
     ProfileComponent,
-<<<<<<< HEAD
-    PopUpHappyComponent,
-=======
     MassiveQuestionUploadStatusComponent,
->>>>>>> f0693f539cd0858cbd50178a27fda9ce6fc688e9
+    PopUpHappyComponent,
  
   ],
   imports: [
