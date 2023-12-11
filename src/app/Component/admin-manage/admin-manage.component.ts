@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { HotTableRegisterer,HotTableModule } from '@handsontable/angular';
+import { HotTableRegisterer } from '@handsontable/angular';
 import Handsontable from 'handsontable';
 import { CellChange, ChangeSource } from 'handsontable/common';
 import { error } from 'handsontable/helpers';

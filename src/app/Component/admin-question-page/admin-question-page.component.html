@@ -1,63 +1,146 @@
-<!DOCTYPE html>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="./admin-question-page.component.css">
-
-</head>
-    <mat-toolbar class="!rounded-none !bg-black-300" id="toolbar">
-        <a mat-button (click)=DisplayDiv()>ADD NEW QUESTION</a>
-        <a mat-button (click)=DisplayDiv2()>BULK UPLOAD</a>
+<div class="w-full">
+    <mat-toolbar class="!rounded-none !bg-white !text-[#797979]" id="toolbar">
+        <a mat-button (click)=DisplayDiv()
+            [ngStyle]="{'background-color': newQuestion === true? '#e0e0e0' : 'transparent'}">ADD NEW QUESTION</a>
+        <a mat-button [ngStyle]="{'background-color': bulkUpload === true? '#e0e0e0' : 'transparent'}"
+            (click)=DisplayDiv2()>BULK UPLOAD</a>
     </mat-toolbar>
-    <body>
-    <div id="bg"></div>
-<div *ngIf="newQuestion" class = "addQuestion">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="form-field">
-                <label>Select Project</label><br>
-                <select formControlName="projectId" >
-                    <option value="" disabled selected>Select Project</option>
-                    <option *ngFor="let project of projects" value="{{project.id}}">{{project.projectName}}</option>
-                </select><br>
-                <input type="text" placeholder="Question Text" class="text-red-950"  formControlName="questionText">
-                <input class="ng-hide" id="input-file-id" type="file"  (change)="setQuestionFile($event)"/>
-                </div>
-                <section>
-                <div class="example-button-row">
-                <div class="example-button-container">
-                </div>
+    <section class="status w-full [&>*]:!bg-white" *ngIf="bulkUpload">
+        <mat-expansion-panel (opened)="onOpen()">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="!text-[#797979] uppercase font-extrabold">
+                    Mastive Question Upload Status
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <section class="flex flex-wrap justify-center items-center">
+                <div *ngFor="let muq of massive_upload">
+                    <app-massive-question-upload-status uploadID="{{muq.questionID}}" uploadDateTime="{{muq.dateTime}}"
+                        uploadStatus="{{muq.uploadStatus}}"></app-massive-question-upload-status>
                 </div>
             </section>
-            <div formArrayName="Options" >
-                <section *ngFor="let option of getAllOptions;let i=index" [formGroupName]="i">
-                  <input type="text" placeholder="Options name" class="text-red-950"  formControlName="answer" >
-                  <input class="ng-hide" id="input-file-id" type="file"  (change)="setOptionImageFile($event,i)"/>
-                  <label for="input-file-id" class="md-button md-raised md-primary">Correct answer</label>
-                  <input type="radio" value="{{i}}" name="answer_index"  [(ngModel)] = "answer_index" [ngModelOptions]="{standalone: true}" >
+        </mat-expansion-panel>
+    </section>
+
+    <div class="w-full flex max-w-full">
+        <div *ngIf="newQuestion" class="addQuestion w-[70%] m-2 mr-3 mb-3 p-1 !bg-[#f5f5f5] rounded-lg">
+            <form [formGroup]="form" class="m-6">
+                <div class="form-field !w-50 pb-4">
+                    <label class="!text-[#797979] block mb-1">Select Project</label>
+                    <select formControlName="projectId"
+                        class="!text-[#797979] w-full outline outline-[#dadada] h-6 rounded-sm">
+                        <option value="" disabled selected>Select Project</option>
+                        <option *ngFor="let project of projects" value="{{project.id}}">{{project.projectName}}</option>
+                    </select>
+                </div>
+                <label class="!text-[#797979] block mb-1 ">Question</label>
+                <div class="Q flex relative justify-between">
+                    <div class="w-[82%]">
+                        <mat-form-field
+                            class="[&>div:first-child]:!bg-white !text-[#797979] !w-[94%]
+                            [&>div:first-child]:outline [&>div:first-child]:outline-[#dadada] [&>div:first-child]:rounded-sm">
+                            <input matInput required="true" type="text" placeholder="Question Text"
+                                formControlName="questionText" class="!text-[#797979]">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <input class="ng-hide" accept=".png, .jpg, .jpeg" id="input-file-id" class="hidden" type="file"
+                            (change)="setQuestionFile($event)" />
+                        <label
+                            class="outline outline-[#dadada] rounded-sm p-2 flex items-center font-extrabold whitespace-nowrap"
+                            for="input-file-id">
+                            <img class="inline mr-1" src="../../../assets/cloud_upload.svg" alt="Upload button" />
+                            Upload Image
+                        </label>
+                        <h6><b>*only Images allowed</b></h6>
+                    </div>
+                </div>
+                <mat-chip-listbox class="mat-mdc-chip-set-stacked" aria-label="Color selection"
+                    (change)="onAnswerSelect($event)">
+                    <div formArrayName="Options" class="w-full">
+                        <section *ngFor="let option of getAllOptions;let i=index" [formGroupName]="i"
+                            class="flex !w-full justify-between [&>*]:!mx-1 relative">
+                            <div class="!w-fit">
+                                <mat-form-field
+                                    class="[&>div:first-child]:!bg-white !text-[#797979] !w-[92%]
+                                [&>div:first-child]:outline [&>div:first-child]:outline-[#dadada] [&>div:first-child]:rounded-sm">
+                                    <input matInput required="true" type="text" required placeholder="Options name"
+                                        class="!text-[#797979]" formControlName="answer">
+                                </mat-form-field>
+                                <input class="ng-hide" [id]="'option_'+i" type="file" class="hidden"
+                                    (change)="setOptionImageFile($event,i)" accept=".png, .jpg, .jpeg" />
+                            </div>
+                            <div>
+                                <label
+                                    class="outline outline-[#dadada] rounded-sm p-2 flex items-center font-extrabold whitespace-nowrap"
+                                    [htmlFor]="'option_'+i">
+                                    <img class="inline mr-1" src="../../../assets/cloud_upload.svg"
+                                        alt="Upload button" />
+                                    Upload Image
+                                </label>
+                                <h6><b>*only Images allowed</b></h6>
+                            </div>
+                            <div class="relative flex justify-center">
+                                <mat-chip-option class="absolute top-[10px] font-extrabold" value="{{i}}"
+                                    color="accent">Correct
+                                    Answer
+                                </mat-chip-option>
+
+                                <!-- <input class="hidden" type="radio" value="{{i}}" [id]="'correct_ans_'+i"
+                                    name="answer_index" [(ngModel)]="answer_index"
+                                    [ngModelOptions]="{standalone: true}">-->
+                            </div>
+
+                        </section>
+                    </div>
+                </mat-chip-listbox>
+                <label class="!text-[#797979] mb-1  w-full  
+                outline-[#dadada] outline-dotted h-6 rounded-sm bg-white flex items-center pl-3"
+                    for="add_options_forq"><span> + Add Options</span></label>
+                <button class="hidden" id="add_options_forq" (click)="addOption()">Add options</button>
+                <section class="!text-[#797979] my-3">
+                    <button type="button" mat-raised-button (click)="formRest()">CANCEL</button>
+                    <button id="submit" mat-raised-button class="!bg-[#ff4081] mx-3"
+                        (click)="onSubmit()">SUBMIT</button>
                 </section>
-             </div> 
-             <button (click)="addOption()" class="addOptionbutton">  ADD OPTION </button>
-             <section>
-                <button type="submit" id="submit">SUBMIT</button>
-              </section>   
-    </form>
+            </form>
 
-</div>
-
-
-<div *ngIf="bulkUpload">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="form-field">
-            <div class="downloadBox">  
-            <button (click)="downloadExcel()" style="padding: 50px 70px;"> Click To Download Template</button><br>
-            <Label style="padding: 60px 90px;">Upload File Here</Label><br>
-            <button  class="downloadButton"> Choose File</button>
         </div>
+        <div *ngIf="newQuestion"
+            class="QuestionAdded flex-[1] m-2 ml-3 p-3 pt-1 mb-3 !bg-[#f5f5f5] rounded-lg relative">
+            <h2 class="!mb-1 uppercase !text-[#797979]">Questions added</h2>
+            <span class="block border-b-2 border-[#E5E8E8]"></span>
+            <div *ngFor="let q of question_added">
+                <div class="flex border-solid border-b !border-[#CCD1D1] relative justify-stretch">
+                    <div class="w-[50px] h-[50px] rounded-[50%] !bg-[#CCD1D1] p-1 m-2 flex items-center justify-center">
+                        <div class="font-extrabold"> {{q.questionNo}}</div>
+                    </div>
+                    <div class="h-auto !break-all m-2 line-clamp-3 overflow-hidden">
+                        {{q.QuestionText}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        </div>  
-        </form>
+    <div *ngIf="bulkUpload" class="w-full h-[60vh] flex justify-center items-center flex-col">
+        <div class="!text-[#797979] w-full text-center my-2"><b>Upload Docx File</b></div>
+        <div class="bg-[#ebefee] m-1 p-10 flex justify-center items-center">
+            <button (click)="downloadExcel()"
+                class="flex justify-center items-center flex-col font-extrabold whitespace-nowrap">
+                <img src="../../../assets/download.svg" alt="download Template" />
+                Click To Download Template</button><br>
+            <input id="massive_upload_question" class="invisible" type="file" accept=".docx"
+                (change)="uploadQuestion($event)" />
+            <div class="relative">
+                <label
+                    class="outline outline-[#dadada] rounded-sm p-2 flex items-center font-extrabold whitespace-nowrap h-[50px]"
+                    for="massive_upload_question">
+                    <img class="inline mr-1" src="../../../assets/cloud_upload.svg" alt="Upload button" />
+                    Upload File Here
+                </label>
+                <h6 class="!relative !-bottom-1"><b>*only Images allowed</b></h6>
+            </div>
+        </div>
+    </div>
+
 </div>
-</body>
-
-
-
