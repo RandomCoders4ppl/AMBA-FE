@@ -9,8 +9,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpComponent } from '../pop-up/pop-up.component';
 import { PopUpHappyComponent } from 'src/app/pop-up-happy/pop-up-happy.component';
-import { error } from 'handsontable/helpers';
-import { MatCardLgImage } from '@angular/material/card';
+
+
 
 @Component({
   selector: 'app-question-page',
@@ -53,8 +53,7 @@ export class QuestionPageComponent implements OnInit {
             this.list_of_question.push(...res)
             this.Page_number++;
             console.log("Adding new Question to List");
-            if (this.list_of_question.length === 0) this.openDialog(PopUpHappyComponent,{ header: "congratulations | Project Completed", text: "Try some Other Project" })
-          })
+            if (this.list_of_question.length === 0) this.openDialog(PopUpComponent,{ header: "congratulations | Project Completed", text: "Try some Other Project" })          })
         },
         error => {
           this.ProjectName = 'Invalid Project';
@@ -79,7 +78,7 @@ export class QuestionPageComponent implements OnInit {
       this.currentQuestionIndex = 0;
       this.openDialog(PopUpHappyComponent,{
         header: "NO Prev Question Available",
-        text: "Try Next Button",
+        text: "Try Next Button"
       })
 
     }
@@ -109,8 +108,7 @@ export class QuestionPageComponent implements OnInit {
     const question = this.list_of_question.at(this.currentQuestionIndex);
     if (question && question.questionID) {
       console.log(this.Answer.value.answerIndex)
-      this.questionService.subQuestionAnswer(question.questionID, this.Answer.value.answerIndex).subscribe(res => {this.openDialog(PopUpHappyComponent,"this is right")},error => {this.openDialog(PopUpComponent,"this is wrong")})
-    }
+      this.questionService.subQuestionAnswer(question.questionID, this.Answer.value.answerIndex).subscribe(res => {this.openDialog(PopUpHappyComponent,"this is right")},error => {this.openDialog(PopUpComponent,"this is wrong")})    }
   }
 
   openDialog(component:any,data: any) {
@@ -120,6 +118,5 @@ export class QuestionPageComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
-
 
 }
