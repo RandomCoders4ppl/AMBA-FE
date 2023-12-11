@@ -20,7 +20,7 @@ export class AdminPageComponent implements OnInit {
   NewProjectForm!: FormGroup;
 
   ngOnInit(): void {
-    this.ptSerivce.getAllTypes().subscribe(res => { console.log(res); this.Types = res})
+    this.getProjects()
     this. NewTypeForm = this.formBuilder.group({
       NewType : new FormControl(null,Validators.required)
     })
@@ -34,7 +34,7 @@ export class AdminPageComponent implements OnInit {
 
   onNewTypeSubmit(){
       const newType : String= this.NewTypeForm.value.NewType;
-      this.ptSerivce.saveNewProjectType(newType.trim()).subscribe(res=>console.log(res))
+      this.ptSerivce.saveNewProjectType(newType.trim()).subscribe(res=> this.getProjects())
   }
 
 
@@ -54,5 +54,7 @@ export class AdminPageComponent implements OnInit {
       this.NewProjectForm.get('NewProjectImage')?.setValue(file)
     }
   }
-
+   getProjects(){
+    this.ptSerivce.getAllTypes().subscribe(res => { this.Types = res})
+   }
 }
