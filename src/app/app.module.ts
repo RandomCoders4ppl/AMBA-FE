@@ -38,6 +38,7 @@ import { PostSuccessInterceptor } from './successpost.inerceptor';
 import { FooterComponent } from './footer/footer.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { ProfileComponent } from './Component/profile/profile.component';
+import { PopUpHappyComponent } from './pop-up-happy/pop-up-happy.component';
  
 // register Handsontable's modules
 registerAllModules();
@@ -57,6 +58,7 @@ registerAllModules();
     AdminManageComponent,
     FooterComponent,
     ProfileComponent,
+    PopUpHappyComponent,
  
   ],
   imports: [

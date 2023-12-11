@@ -9,7 +9,8 @@
         <a mat-button (click)=DisplayDiv()>ADD NEW QUESTION</a>
         <a mat-button (click)=DisplayDiv2()>BULK UPLOAD</a>
     </mat-toolbar>
-   
+    <body>
+    <div id="bg"></div>
 <div *ngIf="newQuestion" class = "addQuestion">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form-field">
@@ -17,12 +18,11 @@
                 <select formControlName="projectId" >
                     <option value="" disabled selected>Select Project</option>
                     <option *ngFor="let project of projects" value="{{project.id}}">{{project.projectName}}</option>
-                </select>
+                </select><br>
                 <input type="text" placeholder="Question Text" class="text-red-950"  formControlName="questionText">
                 <input class="ng-hide" id="input-file-id" type="file"  (change)="setQuestionFile($event)"/>
                 </div>
                 <section>
-                <div class="example-label">Add Options</div>
                 <div class="example-button-row">
                 <div class="example-button-container">
                 </div>
@@ -36,7 +36,7 @@
                   <input type="radio" value="{{i}}" name="answer_index"  [(ngModel)] = "answer_index" [ngModelOptions]="{standalone: true}" >
                 </section>
              </div> 
-             <input type="text" placeholder="Question Text" class="button"  (click)="addOption()">  
+             <button (click)="addOption()" class="addOptionbutton">  ADD OPTION </button>
              <section>
                 <button type="submit" id="submit">SUBMIT</button>
               </section>   
@@ -57,6 +57,7 @@
         </div>  
         </form>
 </div>
+</body>
 
 
 

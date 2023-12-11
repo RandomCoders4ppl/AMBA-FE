@@ -34,7 +34,7 @@
         </mat-expansion-panel-header>
     <form [formGroup]="NewProjectForm" (ngSubmit)="onProjectSubmit()">
         <div class="form-field">
-            <select Name="NewProjectType" >
+            <select formControlName="NewProjectType" >
                 <option value="" disabled selected>Select Project Type</option>
                 <option *ngFor="let type of Types"  value="{{type.id}}">{{type.type}}</option>
             </select>
