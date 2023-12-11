@@ -8,6 +8,9 @@ import { Question } from 'src/app/Models/question';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpComponent } from '../pop-up/pop-up.component';
+import { PopUpHappyComponent } from 'src/app/pop-up-happy/pop-up-happy.component';
+
+
 
 @Component({
   selector: 'app-question-page',
@@ -50,8 +53,7 @@ export class QuestionPageComponent implements OnInit {
             this.list_of_question.push(...res)
             this.Page_number++;
             console.log("Adding new Question to List");
-            if (this.list_of_question.length === 0) this.openDialog({ header: "congratulations | Project Completed", text: "Try some Other Project" })
-          })
+            if (this.list_of_question.length === 0) this.openDialog(PopUpComponent,{ header: "congratulations | Project Completed", text: "Try some Other Project" })          })
         },
         error => {
           this.ProjectName = 'Invalid Project';
@@ -74,7 +76,7 @@ export class QuestionPageComponent implements OnInit {
     if (this.currentQuestionIndex < 0) {
       console.log("No More Question")
       this.currentQuestionIndex = 0;
-      this.openDialog({
+      this.openDialog(PopUpHappyComponent,{
         header: "NO Prev Question Available",
         text: "Try Next Button"
       })
@@ -94,7 +96,7 @@ export class QuestionPageComponent implements OnInit {
         this.Page_number++;
         console.log("Adding new Question to List");
         if (res.length === 0) {
-          this.openDialog({
+          this.openDialog(PopUpHappyComponent,{
             header: "congratulations | Project Completed",
             text: "Try some Other Project"
           }); this.currentQuestionIndex--;
@@ -106,12 +108,11 @@ export class QuestionPageComponent implements OnInit {
     const question = this.list_of_question.at(this.currentQuestionIndex);
     if (question && question.questionID) {
       console.log(this.Answer.value.answerIndex)
-      this.questionService.subQuestionAnswer(question.questionID, this.Answer.value.answerIndex).subscribe(res => console.log(res))
-    }
+      this.questionService.subQuestionAnswer(question.questionID, this.Answer.value.answerIndex).subscribe(res => {this.openDialog(PopUpHappyComponent,"this is right")},error => {this.openDialog(PopUpComponent,"this is wrong")})    }
   }
 
-  openDialog(data: any) {
-    const dialogRef = this.dialog.open(PopUpComponent, { data: data });
+  openDialog(component:any,data: any) {
+    const dialogRef = this.dialog.open(component, { data: data });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
