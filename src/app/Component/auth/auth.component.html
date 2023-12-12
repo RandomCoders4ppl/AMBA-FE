@@ -6,33 +6,33 @@
 
 </head>
 <body>
+
 <section class="User_Registeration" *ngIf="!NewUser">
 <!-- partial:index.partial.html -->
-<div id="bg"></div>
-
-
+<div id="bg">
 <form [formGroup]="LoginForm">
   <div class="form-field">
     <input type="email" placeholder="Email" formControlName="User_Email" required/>
   </div>
-  
   <div class="form-field">
     <input type="password" placeholder="Password" formControlName="User_Password" required/>                         
   </div>
   
   <div class="form-field">
-    <button class="btn" (click)="LogIn()">Log In </button>
+    <button style="margin-top: 20px ;"class="btn" (click)="LogIn()">Log In </button>
   </div>
   <div class="form-field">
     <button class="btn" (click)="setNewUser(true)">SignUp</button>
   </div>
 </form>
 <!-- partial -->
+</div>
 </section>
 
+
 <section class="User_Login" *ngIf="NewUser">
-    <div id="bg"></div>
-<form [formGroup]="SignUp">
+  <div id="bg">
+<form [formGroup]="SignUp" >
     <div class="form-field">
         <input type="text" placeholder="UserName" formControlName="Name" required/>                         
       </div>
@@ -53,8 +53,8 @@
         <button class="btn" (click)="setNewUser(false)">Back to Login</button>
         </div>
   </form>
+  </div>
 </section>
-
-  
 </body>
+
 </html>

@@ -3,57 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="./admin-page.component.css">
-
 </head>
 <body>
-    <div id="bg"></div>
-    <mat-expansion-panel class="!rounded-none !bg-black-300">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
+    <div id="bg">
+            <mat-panel-title style="font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; font-size: 14px;">
                 ADD NEW PROJECT TYPE
             </mat-panel-title>
-            
-        </mat-expansion-panel-header>
-
     <form [formGroup]="NewTypeForm" (ngSubmit)="onNewTypeSubmit()">
         <div class="form-field">
           <input type="text" placeholder="Project Type" formControlName="NewType" required/>
-          <button class="btn" type="submit" id="NewTypeSubmit">Add</button>
-        </div>
-
-        
-
-        
+          <button class="btn" type="submit" id="NewTypeSubmit" onClick="window.location.reload(true)">Add</button>
+        </div>        
     </form>
-    </mat-expansion-panel>
-    <mat-expansion-panel class="!rounded-none !bg-black-300">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
+            <mat-panel-title style="font-family:Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; font-size: 14px;">
                 ADD NEW PROJECT
             </mat-panel-title>
-        </mat-expansion-panel-header>
-    <form [formGroup]="NewProjectForm" (ngSubmit)="onProjectSubmit()">
+        <form [formGroup]="NewProjectForm" (ngSubmit)="onProjectSubmit()">
         <div class="form-field">
-            <select formControlName="NewProjectType" >
+            <select formControlName="NewProjectType" placeholder="Project Type">
                 <option value="" disabled selected>Select Project Type</option>
                 <option *ngFor="let type of Types"  value="{{type.id}}">{{type.type}}</option>
             </select>
         </div>   
-
         <div class="form-field">
             <input type="text" placeholder="Project Name" formControlName="NewProjectName" required/>    
         </div>  
-
         <input type="file" class="choosefile" (change)="setProjectFile($event)"/>
-
         <div class="form-field"></div>
-        <section>
         <button class='btn' type="submit" id="NewTypeSubmit">Submit</button>
-        </section>
+        <button class="btn" style="background-color:#ff4081; margin-left: 360px;" routerLink="/admin/questions">ADD QUESTION</button>
         <div class="form-field"></div>
-     
     </form>
-</mat-expansion-panel>
-
+    </div>
 </body>
 
