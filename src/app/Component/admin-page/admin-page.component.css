@@ -1,14 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 #bg {
-  background-image: url('background.jpg');
-  position: fixed;
-  left: 0;
-  top: 70px;
-  width: 100%;
-  height: 100%;
+  padding: 40px 40px;
+  width: 700px;
+  height: 500px;
   background-size: cover;
-  filter: blur(5px);
-  z-index: -1;
+  background-color: #e6e6e6;
 }
 
 body {
