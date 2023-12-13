@@ -12,6 +12,7 @@ import { PopUpHappyComponent } from 'src/app/pop-up-happy/pop-up-happy.component
 
 
 
+
 @Component({
   selector: 'app-question-page',
   templateUrl: './question-page.component.html',
@@ -39,6 +40,7 @@ export class QuestionPageComponent implements OnInit {
   Answer!: FormGroup;
 
   ngOnInit(): void {
+    this.NabarService.hide();
     this.Answer = this.formBuilder.group({
       answerIndex: new FormControl(null, Validators.required)
     })
@@ -53,7 +55,7 @@ export class QuestionPageComponent implements OnInit {
             this.list_of_question.push(...res)
             this.Page_number++;
             console.log("Adding new Question to List");
-            if (this.list_of_question.length === 0) this.openDialog(PopUpComponent,{ header: "Hurray! Project Completed"})})
+            if (this.list_of_question.length === 0) this.openDialog(PopUpHappyComponent,{ header: "Hurray! Project Completed"})})
         },
         error => {
           this.ProjectName = 'Invalid Project';
@@ -109,6 +111,15 @@ export class QuestionPageComponent implements OnInit {
       console.log(this.Answer.value.answerIndex)
       this.questionService.subQuestionAnswer(question.questionID, this.Answer.value.answerIndex).subscribe(res => {this.openDialog(PopUpHappyComponent,{header: "Correct Answer"})},error => {this.openDialog(PopUpComponent,{header: "Wrong Answer, Try Again"})})    }
   }
+
+  projectCompleted(){
+    if (this.list_of_question.length === 0){
+      return true;
+    }
+    else
+    return false;
+  }
+
 
   openDialog(component:any,data: any) {
     const timeout = 2000;

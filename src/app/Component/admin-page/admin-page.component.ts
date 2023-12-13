@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ProjectType } from 'src/app/Models/project_type';
 import { ProjectTypesService } from 'src/app/Service/project-types.service';
 import { ProjectService } from 'src/app/Service/project.service';
+import { NavbarService } from 'src/app/Service/navbar.service';
+
 
 @Component({
   selector: 'app-admin-page',
@@ -13,13 +15,14 @@ export class AdminPageComponent implements OnInit {
 
   Types! : ProjectType[]
 
-  constructor(private formBuilder:FormBuilder,private ptSerivce : ProjectTypesService,private project : ProjectService){}
+  constructor(private formBuilder:FormBuilder,private ptSerivce : ProjectTypesService,private project : ProjectService, public NabarService: NavbarService){}
 
   NewTypeForm!: FormGroup;
 
   NewProjectForm!: FormGroup;
 
   ngOnInit(): void {
+    this.NabarService.show();
     this.getProjects()
     this. NewTypeForm = this.formBuilder.group({
       NewType : new FormControl(null,Validators.required)

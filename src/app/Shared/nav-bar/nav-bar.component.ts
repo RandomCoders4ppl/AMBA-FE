@@ -12,7 +12,7 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class NavBarComponent implements OnInit,AfterViewInit{
 
-  constructor( private navBarService : NavbarService,private auth:AuthService,private cdr: ChangeDetectorRef){}
+  constructor( public navBarService : NavbarService,private auth:AuthService,private cdr: ChangeDetectorRef){}
   
   name: string = '';
   email:string = '';
