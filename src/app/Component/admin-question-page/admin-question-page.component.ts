@@ -9,6 +9,7 @@ import { Question } from 'src/app/Models/question';
 import { ProjectCardService } from 'src/app/Service/Shared/project-cards/project-card.service';
 import { QuestionService } from 'src/app/Service/question.service';
 import { NavbarService } from 'src/app/Service/navbar.service';
+import { error } from 'handsontable/helpers';
 
 
 
@@ -146,10 +147,12 @@ export class AdminQuestionPageComponent implements OnInit {
   }
 
   uploadQuestion(event: Event) {
+    console.log("TEST")
     const inputElement = event.target as HTMLInputElement;
     const file = inputElement?.files?.[0];
+    console.log(file)
     if (file && file?.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-      this.questionService.uploadQuestions(file).subscribe(res => console.log(res))
+      this.questionService.uploadQuestions(file).subscribe(res => inputElement.value='',error=>inputElement.value='')
     }
   }
 
