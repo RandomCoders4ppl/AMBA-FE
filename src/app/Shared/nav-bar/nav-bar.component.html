@@ -1,5 +1,5 @@
 <section class="navbar" #matNavbar>
-  <mat-toolbar class="navContainer fixed top-0 w-full flex justify-between">
+  <mat-toolbar *ngIf="navBarService.visible" class="navContainer fixed top-0 w-full flex justify-between">
     <div>
       <span class="text-xl">
         <a routerLink="/">

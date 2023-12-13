@@ -12,6 +12,7 @@ import { PopUpHappyComponent } from 'src/app/pop-up-happy/pop-up-happy.component
 
 
 
+
 @Component({
   selector: 'app-question-page',
   templateUrl: './question-page.component.html',
@@ -39,6 +40,7 @@ export class QuestionPageComponent implements OnInit {
   Answer!: FormGroup;
 
   ngOnInit(): void {
+    this.NabarService.hide();
     this.Answer = this.formBuilder.group({
       answerIndex: new FormControl(null, Validators.required)
     })

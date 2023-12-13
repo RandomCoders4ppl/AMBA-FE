@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Service/auth.service';
+import { NavbarService } from 'src/app/Service/navbar.service';
+
 
 @Component({
   selector: 'app-auth',
@@ -10,7 +12,7 @@ import { AuthService } from 'src/app/Service/auth.service';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private formbuilder : FormBuilder,private auth: AuthService,private router:Router){}
+  constructor(private formbuilder : FormBuilder,private auth: AuthService,private router:Router, public NabarService: NavbarService){}
 
   public NewUser : Boolean = false;
 
@@ -19,6 +21,7 @@ export class AuthComponent implements OnInit {
   public SignUp! : FormGroup;
   
   ngOnInit(): void {
+    this.NabarService.show();
     this.LoginForm = this.formbuilder.group({
       User_Email : new FormControl(null,[Validators.required,Validators.email]),
       User_Password : new FormControl(null,[Validators.required,Validators.minLength(3)])

@@ -5,7 +5,17 @@ import { Injectable } from '@angular/core';
 })
 export class NavbarService {
 
-  constructor() { }
+  visible: boolean;
+
+  constructor() { this.visible = false; }
+
+  hide() { this.visible = false; }
+
+  show() { this.visible = true; }
+
+  toggle() { this.visible = !this.visible; }
+
+  doSomethingElseUseful() { }
   
   public  heightOfNavbar : number = 64;
 

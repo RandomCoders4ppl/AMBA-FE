@@ -8,6 +8,8 @@ import { Project } from 'src/app/Models/project';
 import { Question } from 'src/app/Models/question';
 import { ProjectCardService } from 'src/app/Service/Shared/project-cards/project-card.service';
 import { QuestionService } from 'src/app/Service/question.service';
+import { NavbarService } from 'src/app/Service/navbar.service';
+
 
 
 @Component({
@@ -30,9 +32,10 @@ export class AdminQuestionPageComponent implements OnInit {
   massive_upload:any = [];
 
 
-  constructor(private formBuilder: FormBuilder, private projectService: ProjectCardService, private questionService: QuestionService, private cd: ChangeDetectorRef) { }
+  constructor(private formBuilder: FormBuilder, private projectService: ProjectCardService, private questionService: QuestionService, private cd: ChangeDetectorRef, public NabarService: NavbarService) { }
 
   ngOnInit(): void {
+    this.NabarService.show();
     this.projectService.getAllProjectsNoImage().subscribe(res => this.projects = res);
     this.form = this.formBuilder.group({
       projectId: new FormControl(null, Validators.required),
