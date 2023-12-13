@@ -19,7 +19,7 @@ export class ProjectCardsComponent implements OnInit{
 
 
   onclickProject(){
-    this.router.navigate(["/project/"+this.id])
+    this.router.navigate(["/project/"+this.id.trimEnd()])
   }
 
 }

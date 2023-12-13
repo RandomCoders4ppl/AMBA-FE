@@ -1,6 +1,6 @@
 <div class="grid grid-cols-4 gap-1 items-center place-items-center w-full 
 border-t text-white min-h-[calc(100vh_-_290px)]">
-    <app-project-cards class="" *ngFor="let p of projectList;"  image="{{'data:image/png;base64,'+p.image}}" id="{{p.id}} " name="{{p.projectName}}"></app-project-cards>
+    <app-project-cards *ngFor="let p of projectList;"  image="{{'data:image/png;base64,'+p.image}}" id="{{p.id}} " name="{{p.projectName}}"></app-project-cards>
 </div>
 
 

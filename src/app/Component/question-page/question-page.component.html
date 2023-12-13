@@ -14,8 +14,10 @@
         </div>                
             <div class="graydiv">
                 <img src="{{'data:image/png;base64,'+list_of_question[currentQuestionIndex]?.question}}" />
+                <img src="../assets/happy.jpg" *ngIf="projectCompleted()" />
             </div>   
     </section>
+    <div *ngIf="projectCompleted()" style="font-family: 'Trebuchet MS'; font-size: 50px;float: right;margin:150px;font-weight: bold;">PROJECT COMPLETED</div>
         <form class="h-full w-full" [formGroup]="Answer">
             <mat-radio-group aria-label="Select an option" formControlName="answerIndex"  (change)="onAnswerChange()">
             <div class="grid  grid-cols-[repeat(auto-fit,minmax(330px,1fr))] gap-4 m-3">     
