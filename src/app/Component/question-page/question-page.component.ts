@@ -108,7 +108,6 @@ export class QuestionPageComponent implements OnInit {
   onAnswerChange() {
     const question = this.list_of_question.at(this.currentQuestionIndex);
     if (question && question.questionID) {
-      console.log(this.Answer.value.answerIndex)
       this.questionService.subQuestionAnswer(question.questionID, this.Answer.value.answerIndex).subscribe(res => {this.openDialog(PopUpHappyComponent,{header: "Correct Answer"})},error => {this.openDialog(PopUpComponent,{header: "Wrong Answer, Try Again"})})    }
   }
 
@@ -123,9 +122,11 @@ export class QuestionPageComponent implements OnInit {
 
   openDialog(component:any,data: any) {
     const timeout = 2000;
+    if(data.header === "Correct Answer"){
+      this.moveTONext();
+    }
     const dialogRef = this.dialog.open(component, { data: data });
     dialogRef.afterOpened().subscribe(result => {
-      console.log(`Dialog result: ${result}`),
       setTimeout(() => {
         dialogRef.close();
      }, timeout)
