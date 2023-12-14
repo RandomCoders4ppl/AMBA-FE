@@ -1,37 +1,11 @@
-<!--<div  *ngFor="let p of projectList;" class="!w-500 h-6">
-  <mat-card class="example-card">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{p.id}}</mat-card-title>
-        <mat-card-subtitle>{{p.projectName}}</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image class="w-[400px]" src="{{'data:image/png;base64,'+p.image}}" alt="{{p.projectName}}">
-      <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-          A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-          bred for hunting.
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
-  </mat-card>
-</div>
--->
-
-<div class="w-[250px] h-[250px] m-1 rounded-l flex flex-col cursor-pointer" (click)="onclickProject()">
-  <div class="flex-grow p-1 bg-gray-200  flex justify-center items-center overflow-hidden">
+<div class="relative w-[320px] h-[320px] m-1 rounded-lg flex flex-col  outline-dotted outline-[#dadada] items-center cursor-pointer !bg-[#f5f5f5]" (click)="onclickProject()">
+  <div class="flex-grow p-1  !text-[#797979] w-[80%] h-[80%]  overflow-hidden mt-2">
      <img src="{{image}}" alt="{{name}}"/>
   </div>
-  <div>
-    <mat-card class="example-card !rounded-none">
-      <mat-card-header >
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title >{{name}}</mat-card-title>
-      </mat-card-header>
-    </mat-card>
+  <div class="!w-full text-center">
+        <button  mat-button class="!w-full"  color="accent">
+          <span class="uppercase font-extrabold h-auto !break-all m-2 line-clamp-1 overflow-hidden">{{name}}</span>
+        </button>
   </div>
 </div>
 
