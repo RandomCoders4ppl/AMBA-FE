@@ -149,7 +149,7 @@ export class AdminQuestionPageComponent implements OnInit {
     const inputElement = event.target as HTMLInputElement;
     const file = inputElement?.files?.[0];
     if (file && file?.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
-      this.questionService.uploadQuestions(file).subscribe(res => console.log(res))
+      this.questionService.uploadQuestions(file).subscribe(res => inputElement.value='')
     }
   }
 

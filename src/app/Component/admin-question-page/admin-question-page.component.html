@@ -9,11 +9,11 @@
         <mat-expansion-panel (opened)="onOpen()">
             <mat-expansion-panel-header>
                 <mat-panel-title class="!text-[#797979] uppercase font-extrabold">
-                    Mastive Question Upload Status
+                    Massive Question Upload Status
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <section class="flex flex-wrap justify-center items-center">
-                <div *ngFor="let muq of massive_upload">
+                <div *ngFor="let muq of massive_upload" class="m-1">
                     <app-massive-question-upload-status uploadID="{{muq.questionID}}" uploadDateTime="{{muq.dateTime}}"
                         uploadStatus="{{muq.uploadStatus}}"></app-massive-question-upload-status>
                 </div>
