@@ -3,6 +3,7 @@ import { User } from 'src/app/Models/User';
 import { AuthService } from 'src/app/Service/auth.service';
 import { NavbarService } from 'src/app/Service/navbar.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 
 @Component({
@@ -12,11 +13,13 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class NavBarComponent implements OnInit,AfterViewInit{
 
-  constructor( public navBarService : NavbarService,private auth:AuthService,private cdr: ChangeDetectorRef){}
+  constructor( public navBarService : NavbarService,private auth:AuthService,private cdr: ChangeDetectorRef,private router:Router){}
   
   name: string = '';
   email:string = '';
   admin:boolean = false;
+
+  hide :boolean=false;
     
   @ViewChild('matNavbar', { static: true })
   matNavbar!: ElementRef ;
@@ -27,6 +30,15 @@ export class NavBarComponent implements OnInit,AfterViewInit{
       this.email=user.email;
       this.admin = (user.role as string).toUpperCase()==="ADMIN"?true:false;
     })
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        if(event.url.includes("/project/")){
+          this.hide=true;
+        }else{
+          this.hide=false;
+        }
+      }
+    });
   }
 
   ngAfterViewInit(): void {
