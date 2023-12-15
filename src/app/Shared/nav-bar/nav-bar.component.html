@@ -1,8 +1,8 @@
 <section class="navbar" #matNavbar>
-  <mat-toolbar *ngIf="navBarService.visible" class="navContainer fixed top-0 w-full flex justify-between">
+  <mat-toolbar  class="navContainer fixed top-0 w-full flex justify-between">
     <div>
       <span class="text-xl">
-        <a routerLink="/">
+        <a  [routerLink]="['/']">
           AMBA
         </a>
       </span>
@@ -17,8 +17,8 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item disabled *ngIf="name" class="truncate overflow-ellipsis">{{name}}</button>
-        <button mat-menu-item *ngIf="email || name" (click)="Profile()">Profile</button>
-        <button mat-menu-item *ngIf="admin" routerLink="/admin/managetool" >Manage roles</button>
+        <button mat-menu-item  *ngIf="admin" routerLink="admin/report">Reports</button>
+        <button mat-menu-item *ngIf="admin" routerLink="admin/managetool" >Manage roles</button>
         <button mat-menu-item (click)="LogIn()">Log In</button>
         <button mat-menu-item (click)="LogOut()">Log Out</button>
       </mat-menu>

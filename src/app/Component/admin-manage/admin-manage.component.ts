@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/Service/auth.service';
   templateUrl: './admin-manage.component.html',
   styleUrls: ['./admin-manage.component.css']
 })
-export class AdminManageComponent implements AfterViewInit, OnDestroy {
+export class AdminManageComponent implements AfterViewInit {
 
 
   hotRegisterer = new HotTableRegisterer()
@@ -219,9 +219,6 @@ export class AdminManageComponent implements AfterViewInit, OnDestroy {
   }
 
 
-  ngOnDestroy(): void {
-    this.hotRegisterer.getInstance(this.mt_id).destroy();
-  }
 
   ChangeRowColor(rowIndex: number, CssClassName: string) {
     const instance = this.hotRegisterer.getInstance(this.mt_id);

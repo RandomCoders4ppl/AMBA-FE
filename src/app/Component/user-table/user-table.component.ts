@@ -11,7 +11,7 @@ import * as moment from 'moment';
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.css']
 })
-export class UserTableComponent implements AfterViewInit, OnDestroy {
+export class UserTableComponent implements AfterViewInit {
 
   hotRegisterer = new HotTableRegisterer();
   id = 'hotInstance';
@@ -135,8 +135,5 @@ export class UserTableComponent implements AfterViewInit, OnDestroy {
 
   }
 
-  ngOnDestroy() {
-    this.hotRegisterer.getInstance(this.id).destroy();
-  }
 
 }
