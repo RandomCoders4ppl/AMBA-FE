@@ -12,7 +12,7 @@ on :
 
 
 jobs:
-      push-store-image:
+      push-to-gcr:
         runs-on: ubuntu-latest
         steps:
           - name: 'Checkout GitHub Action'
