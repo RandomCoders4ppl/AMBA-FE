@@ -1,0 +1,34 @@
+name: Deploy Images to GHCR
+
+env:
+  DOTNET_VERSION: '6.0.x'
+
+on :
+  workflow_dispatch:
+      inputs:
+        name:
+         description: "Select Realse Branch"
+         default: "master"
+
+
+jobs:
+      push-store-image:
+        runs-on: ubuntu-latest
+        defaults:
+          run:
+            working-directory: './Store'
+        steps:
+          - name: 'Checkout GitHub Action'
+            uses: actions/checkout@v3
+
+          - name: 'Login to GitHub Container Registry'
+            uses: docker/login-action@v3
+            with:
+              registry: ghcr.io
+              username: ${{github.actor}}
+              password: ${{secrets.GITHUB_TOKEN}}
+
+          - name: 'Build Inventory Image'
+            run: |
+              docker build . --tag ghcr.io/engineerscodes/ambafrontend:latest
+              docker push ghcr.io/engineerscodes/ambafrontend:latest
