@@ -10,6 +10,7 @@ import { ProjectCardService } from 'src/app/Service/Shared/project-cards/project
 import { QuestionService } from 'src/app/Service/question.service';
 import { NavbarService } from 'src/app/Service/navbar.service';
 import { error } from 'handsontable/helpers';
+import { environment } from 'src/environment.prod';
 
 
 
@@ -76,7 +77,7 @@ export class AdminQuestionPageComponent implements OnInit {
       })
       formData.append('options', new Blob([JSON.stringify(ans)], { type: "application/json" }));
       formData.append('answer_id', this.form.value.answer_id);
-      this.questionService.postNewQuestion("http://localhost:8080/Question/new", formData)
+      this.questionService.postNewQuestion(`${environment.backend_api}/Question/new`, formData)
         .subscribe(res => { 
           this.form.reset(); 
           this.answer_index = '';

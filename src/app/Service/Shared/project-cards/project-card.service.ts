@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from  '@angular/common/http';
 import { Project } from 'src/app/Models/project';
+import { environment } from 'src/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Project } from 'src/app/Models/project';
 export class ProjectCardService {
   
 
-  private url = "http://localhost:8080/project/list";
+  private url = `${environment.backend_api}/project/list`;
 
   constructor(private http : HttpClient) { }
 
@@ -18,7 +19,7 @@ export class ProjectCardService {
   }
 
   getAllProjectsNoImage(){
-    return this.http.get<Project[]>("http://localhost:8080/project/list/noImage")
+    return this.http.get<Project[]>(`${environment.backend_api}/project/list/noImage`)
   }
 
 }

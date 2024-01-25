@@ -9,6 +9,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpComponent } from '../pop-up/pop-up.component';
 import { PopUpHappyComponent } from 'src/app/pop-up-happy/pop-up-happy.component';
+import { environment } from 'src/environment.prod';
 
 
 
@@ -48,7 +49,7 @@ export class QuestionPageComponent implements OnInit {
     this.QuestionPageSize = `calc(100vh - ${this.NabarService.heightOfNavbar}px)`;
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
-      this.http.get('http://localhost:8080/project/' + id).subscribe(
+      this.http.get(`${environment.backend_api}/project/` + id).subscribe(
         res => {
           this.ProjectName = res.hasOwnProperty('projectName') ? JSON.parse(JSON.stringify(res)).projectName : '';
           this.questionService.getAllQuestionByProject(id, this.Page_number).subscribe(res => {

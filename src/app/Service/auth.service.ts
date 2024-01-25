@@ -5,6 +5,7 @@ import { Auth } from '../Models/Auth';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { User } from '../Models/User';
+import { environment } from 'src/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
 
   constructor(private httpclient: HttpClient, private jwtHelper: JwtHelperService, private router: Router) { }
 
-  BASE_URL_AUTH = 'http://localhost:8080/auth/'
+  BASE_URL_AUTH = `${environment.backend_api}/auth/`
 
   public UserAuth!: Auth
 

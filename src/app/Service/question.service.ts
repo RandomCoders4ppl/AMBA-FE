@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Question } from '../Models/question'
+import { environment } from 'src/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Question } from '../Models/question'
 export class QuestionService {
 
 
-  QUESTION_BASE_URL = "http://localhost:8080/Question/"
+  QUESTION_BASE_URL = `${environment.backend_api}/Question/`
 
   constructor(private http: HttpClient) { }
 
@@ -31,7 +32,7 @@ export class QuestionService {
   }
 
   uploadQuestions(file: File): Observable<any> {
-    const url = "http://localhost:8080/admin/uploadQuestions";
+    const url = `${environment.backend_api}/admin/uploadQuestions`;
     const form = new FormData();
     form.append('file', file);
     const headers = new HttpHeaders()
@@ -41,12 +42,17 @@ export class QuestionService {
   }
 
   getUploadStatus():Observable<any>{
-    const url = "http://localhost:8080/admin/massiveUpload/status"
+    const url = `${environment.backend_api}/admin/massiveUpload/status`
     return this.http.get<any>(url);
   }
 
   downloadRespDocument(uploadID:number):Observable<any>{
-    const url = "http://localhost:8080/admin/downloadFile?id="+uploadID;
+    const url = `${environment.backend_api}/admin/downloadFile?id=`+uploadID;
     return this.http.get(url,{responseType: "blob"});
+  }
+
+  getUserAnswer(email:string,projectId : string){
+    const url = `${environment.backend_api}/admin/answer?email=`+email+"&prjID="+projectId;
+    return this.http.get(url);
   }
 }

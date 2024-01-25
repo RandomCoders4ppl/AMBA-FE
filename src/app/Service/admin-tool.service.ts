@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Users } from '../Models/Users';
 import { AdminReqType } from '../Models/AdminReqType';
+import { environment } from 'src/environment.prod';
 
 
 
@@ -11,7 +12,7 @@ import { AdminReqType } from '../Models/AdminReqType';
 })
 export class AdminToolService {
 
-  BASE_URL_ADMIN = "http://localhost:8080/admin"
+  BASE_URL_ADMIN = `${environment.backend_api}/admin`
 
   constructor(private http : HttpClient) { }
   
