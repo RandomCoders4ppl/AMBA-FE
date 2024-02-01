@@ -7,5 +7,7 @@ export interface Report{
     role: string,
     reportDateTime: string,
     totalQuestions: number,
-    project: string
+    project: string,
+    projectUuid:string
+    answerRoute:string
 }
