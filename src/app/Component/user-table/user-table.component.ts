@@ -4,6 +4,8 @@ import Handsontable from 'handsontable';
 import { ReportService } from 'src/app/Service/report.service';
 import { Report } from '../../Models/report';
 import * as moment from 'moment';
+import * as sanitizeHtml from 'sanitize-html';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -71,7 +73,8 @@ export class UserTableComponent implements AfterViewInit {
       {
         title: 'View All Answer',
         type: 'text',
-        data: 'model',
+        data: 'answerRoute',
+        readOnly:true
       },
       {
         title: 'Report Date and Time',
@@ -99,13 +102,14 @@ export class UserTableComponent implements AfterViewInit {
 
   };
 
-  constructor(private reportService: ReportService) { }
+  constructor(private reportService: ReportService,private router:Router) { }
 
   ngAfterViewInit(): void {
     let hot = this.hotRegisterer.getInstance(this.id);
     this.reportService.getAdminReport().subscribe(res => {
       res.content.forEach(element=> {
         element.reportDateTime = moment(element.reportDateTime).format('DD/MM/YYYY HH:MM:SS');
+        element.answerRoute = 'admin/useranswers/'+sanitizeHtml(element.projectUuid)+'/'+sanitizeHtml(element.email);
         this.data.push(element)
       });
       this.MaxPage = res.totalPages ;
@@ -119,9 +123,10 @@ export class UserTableComponent implements AfterViewInit {
       if (element) {
         if (element.scrollTop + element.clientHeight >= element.scrollHeight -50 && this.Page < this.MaxPage) {
           this.reportService.getAdminReport(this.Page).subscribe(res => {
-            res.content.forEach((element: Report) => {
-              element.reportDateTime = moment(element.reportDateTime).format('DD/MM/YYYY HH:MM:SS');
-              this.data.push(element)
+            res.content.forEach((item: Report) => {
+              item.reportDateTime = moment(item.reportDateTime).format('DD/MM/YYYY HH:MM:SS');
+              item.answerRoute = 'admin/useranswers/'+sanitizeHtml(item.projectUuid)+'/'+sanitizeHtml(item.email);
+              this.data.push(item)
             });
             this.MaxPage = res.totalPages ;
             hot.updateData(this.data)
@@ -132,8 +137,13 @@ export class UserTableComponent implements AfterViewInit {
       }
     }
     )
+    hot.addHook('afterOnCellMouseDown',(event: MouseEvent, coords: Handsontable.CellCoords, TD: HTMLTableCellElement)=>{
+         const targetColIndex = hot.propToCol('answerRoute')
+         console.log(targetColIndex)
+         if(targetColIndex!=coords.col) return
+         this.router.navigate([hot.getDataAtCell(coords.row,coords.col)]);
+    })
 
   }
-
 
 }
