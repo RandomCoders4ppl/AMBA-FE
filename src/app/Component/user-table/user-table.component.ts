@@ -139,7 +139,6 @@ export class UserTableComponent implements AfterViewInit {
     )
     hot.addHook('afterOnCellMouseDown',(event: MouseEvent, coords: Handsontable.CellCoords, TD: HTMLTableCellElement)=>{
          const targetColIndex = hot.propToCol('answerRoute')
-         console.log(targetColIndex)
          if(targetColIndex!=coords.col) return
          this.router.navigate([hot.getDataAtCell(coords.row,coords.col)]);
     })

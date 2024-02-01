@@ -9,7 +9,7 @@ import { RoleGuard} from './Ngguard/guard.guard';
 import { AdminManageComponent } from './Component/admin-manage/admin-manage.component';
 import { ProfileComponent } from './Component/profile/profile.component';
 import { UserTableComponent } from './Component/user-table/user-table.component';
-import { UserAnswersComponent } from './user-answers/user-answers.component';
+import { UserAnswersComponent } from './Component/user-answers/user-answers.component';
 
 const routes: Routes = [
   {path:'project/:id',component:QuestionPageComponent,canActivate:[RoleGuard]},

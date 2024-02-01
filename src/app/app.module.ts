@@ -43,7 +43,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { MassiveQuestionUploadStatusComponent } from './Component/massive-question-upload-status/massive-question-upload-status.component';
 import {MatChipsModule} from '@angular/material/chips';
 import { PopUpHappyComponent } from './pop-up-happy/pop-up-happy.component';
-import { UserAnswersComponent } from './user-answers/user-answers.component';
+import { UserAnswersComponent } from './Component/user-answers/user-answers.component';
 
 // register Handsontable's modules
 registerAllModules();
