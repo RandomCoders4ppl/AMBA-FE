@@ -21,8 +21,8 @@ export class NavBarComponent implements OnInit,AfterViewInit{
 
   hide :boolean=false;
     
-  @ViewChild('matNavbar', { static: true })
-  matNavbar!: ElementRef ;
+  @ViewChild('matNavbar', { static: false })
+  matNavbar!: ElementRef;
 
   ngOnInit(): void {
     this.auth.getUser().subscribe(user=>{
@@ -42,6 +42,7 @@ export class NavBarComponent implements OnInit,AfterViewInit{
   }
 
   ngAfterViewInit(): void {
+    console.log(this.matNavbar)
     var width = this.matNavbar.nativeElement.offsetWidth;
     this.navBarService.heightOfNavbar = this.matNavbar.nativeElement.offsetHeight;
     console.log('Width:' + width);
