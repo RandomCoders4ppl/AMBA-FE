@@ -44,6 +44,7 @@ import { MassiveQuestionUploadStatusComponent } from './Component/massive-questi
 import {MatChipsModule} from '@angular/material/chips';
 import { PopUpHappyComponent } from './pop-up-happy/pop-up-happy.component';
 import { UserAnswersComponent } from './Component/user-answers/user-answers.component';
+import { UserQuestionViewComponent } from './Component/user-question-view/user-question-view.component';
 
 // register Handsontable's modules
 registerAllModules();
@@ -66,6 +67,7 @@ registerAllModules();
     MassiveQuestionUploadStatusComponent,
     PopUpHappyComponent,
     UserAnswersComponent,
+    UserQuestionViewComponent,
  
   ],
   imports: [
