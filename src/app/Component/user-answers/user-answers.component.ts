@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ReportService } from 'src/app/Service/report.service';
 
 @Component({
   selector: 'app-user-answers',
@@ -8,12 +9,23 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserAnswersComponent implements OnInit{
 
-  constructor(private route: ActivatedRoute){}
+  QuestionCompleted : String[] = [];
+
+  constructor(private route: ActivatedRoute,private report:ReportService){}
 
   ngOnInit(): void {
     const projectUuid = this.route.snapshot.paramMap.get('projectid');
     const email = this.route.snapshot.paramMap.get('email');
-    console.log(email,projectUuid)
+    if(projectUuid && email){
+      this.report.getUserAnswerByProject(email,projectUuid).subscribe({
+        next: (value) => {
+          this.QuestionCompleted = value;
+        },
+        error: (error) => {
+          console.error('Error:', error);
+        }
+      })
+    }
   }
 
 
