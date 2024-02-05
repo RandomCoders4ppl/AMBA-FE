@@ -110,7 +110,7 @@ export class UserTableComponent implements AfterViewInit {
     let hot = this.hotRegisterer.getInstance(this.id);
     this.reportService.getAdminReport().subscribe(res => {
       res.content.forEach(element => {
-        element.reportDateTime = moment(element.reportDateTime).format('DD/MM/YYYY HH:MM:SS');
+        element.reportDateTime = moment(element.reportDateTime).format('DD/MM/YYYY HH:mm:ss');
         element.answerRoute = ''//'admin/useranswers/'+sanitizeHtml(element.projectUuid)+'/'+sanitizeHtml(element.email);
         this.data.push(element)
         this.reportDate = moment(element.reportDateTime).format('DD-MM-YYYY');
@@ -127,7 +127,7 @@ export class UserTableComponent implements AfterViewInit {
         if (element.scrollTop + element.clientHeight >= element.scrollHeight - 50 && this.Page < this.MaxPage) {
           this.reportService.getAdminReport(this.Page).subscribe(res => {
             res.content.forEach((item: Report) => {
-              item.reportDateTime = moment(item.reportDateTime).format('DD/MM/YYYY HH:MM:SS');
+              item.reportDateTime = moment(item.reportDateTime).format('DD/MM/YYYY HH:mm:ss');
               item.answerRoute = ''//'admin/useranswers/'+sanitizeHtml(item.projectUuid)+'/'+sanitizeHtml(item.email);
               this.data.push(item)
             });
