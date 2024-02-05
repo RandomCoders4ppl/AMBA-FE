@@ -22,6 +22,8 @@ export class UserTableComponent implements AfterViewInit {
   Page = 0;
   MaxPage = 50;
 
+  reportDate: string = '';
+
   hotSettings: Handsontable.GridSettings = {
     data: this.data,
     columns: [
@@ -74,7 +76,7 @@ export class UserTableComponent implements AfterViewInit {
         title: 'View All Answer',
         type: 'text',
         data: 'answerRoute',
-        readOnly:true
+        readOnly: true
       },
       {
         title: 'Report Date and Time',
@@ -102,17 +104,18 @@ export class UserTableComponent implements AfterViewInit {
 
   };
 
-  constructor(private reportService: ReportService,private router:Router) { }
+  constructor(private reportService: ReportService, private router: Router) { }
 
   ngAfterViewInit(): void {
     let hot = this.hotRegisterer.getInstance(this.id);
     this.reportService.getAdminReport().subscribe(res => {
-      res.content.forEach(element=> {
+      res.content.forEach(element => {
         element.reportDateTime = moment(element.reportDateTime).format('DD/MM/YYYY HH:MM:SS');
-        element.answerRoute = 'admin/useranswers/'+sanitizeHtml(element.projectUuid)+'/'+sanitizeHtml(element.email);
+        element.answerRoute = ''//'admin/useranswers/'+sanitizeHtml(element.projectUuid)+'/'+sanitizeHtml(element.email);
         this.data.push(element)
+        this.reportDate = moment(element.reportDateTime).format('DD-MM-YYYY');
       });
-      this.MaxPage = res.totalPages ;
+      this.MaxPage = res.totalPages;
       hot.loadData(this.data)
       hot.render()
       this.Page++;
@@ -121,14 +124,14 @@ export class UserTableComponent implements AfterViewInit {
     hot.addHook('afterScrollVertically', () => {
       const element = document.getElementsByClassName('wtHolder')[0]
       if (element) {
-        if (element.scrollTop + element.clientHeight >= element.scrollHeight -50 && this.Page < this.MaxPage) {
+        if (element.scrollTop + element.clientHeight >= element.scrollHeight - 50 && this.Page < this.MaxPage) {
           this.reportService.getAdminReport(this.Page).subscribe(res => {
             res.content.forEach((item: Report) => {
               item.reportDateTime = moment(item.reportDateTime).format('DD/MM/YYYY HH:MM:SS');
-              item.answerRoute = 'admin/useranswers/'+sanitizeHtml(item.projectUuid)+'/'+sanitizeHtml(item.email);
+              item.answerRoute = ''//'admin/useranswers/'+sanitizeHtml(item.projectUuid)+'/'+sanitizeHtml(item.email);
               this.data.push(item)
             });
-            this.MaxPage = res.totalPages ;
+            this.MaxPage = res.totalPages;
             hot.updateData(this.data)
             hot.render()
             this.Page++;
@@ -137,12 +140,26 @@ export class UserTableComponent implements AfterViewInit {
       }
     }
     )
-    hot.addHook('afterOnCellMouseDown',(event: MouseEvent, coords: Handsontable.CellCoords, TD: HTMLTableCellElement)=>{
-         const targetColIndex = hot.propToCol('answerRoute')
-         if(targetColIndex!=coords.col) return
-         this.router.navigate([hot.getDataAtCell(coords.row,coords.col)]);
+    hot.addHook('afterOnCellMouseDown', (event: MouseEvent, coords: Handsontable.CellCoords, TD: HTMLTableCellElement) => {
+      // const targetColIndex = hot.propToCol('answerRoute')
+      // if(targetColIndex!=coords.col) return
+      //  this.router.navigate([hot.getDataAtCell(coords.row,coords.col)]);
     })
 
+  }
+
+
+
+  downloadRespDocument() {
+
+    this.reportService.downloadRespDocument(this.reportDate).subscribe(data => {
+      console.log(data)
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
+      downloadLink.download = "report_" + this.reportDate + ".xlsx";
+      console.log(downloadLink.download)
+      downloadLink.click();
+    });
   }
 
 }
