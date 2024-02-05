@@ -9,6 +9,7 @@ import { environment } from 'src/environment.prod';
   providedIn: 'root'
 })
 export class ReportService {
+  
 
   BASE_ADMIN_URL = `${environment.backend_api}/admin/`
 
@@ -16,6 +17,19 @@ export class ReportService {
   
   getAdminReport(page = 0): Observable<AdminReportPage>{
      return this.http.get<AdminReportPage>(this.BASE_ADMIN_URL+"report?page="+page);
+  }
+
+  getUserAnswerByProject(email:string,projectUuid:string){
+    return this.http.get<[]>(this.BASE_ADMIN_URL+"answer?email="+email+'&prjID='+projectUuid);
+  }
+
+  getQuestion(email:string,questionUuid:string){
+    return this.http.get<[]>(this.BASE_ADMIN_URL+"question?email="+email+'&questionUuid='+questionUuid);
+  }
+
+  downloadRespDocument(date: string) {
+    const url = `${this.BASE_ADMIN_URL}downloadReport?date=`+date;
+    return this.http.get(url,{responseType: "blob"});
   }
 
 }
