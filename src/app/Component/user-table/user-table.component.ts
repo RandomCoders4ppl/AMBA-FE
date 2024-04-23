@@ -113,7 +113,7 @@ export class UserTableComponent implements AfterViewInit {
         element.reportDateTime = moment(element.reportDateTime).format('DD/MM/YYYY HH:mm:ss');
         element.answerRoute = ''//'admin/useranswers/'+sanitizeHtml(element.projectUuid)+'/'+sanitizeHtml(element.email);
         this.data.push(element)
-        this.reportDate = moment(element.reportDateTime,"DD/MM/YYYY").format('DD/MM/YYYY')
+        this.reportDate = moment(element.reportDateTime,"DD/MM/YYYY").format('DD-MM-YYYY')
       });
       this.MaxPage = res.totalPages;
       hot.loadData(this.data)
@@ -138,13 +138,6 @@ export class UserTableComponent implements AfterViewInit {
           })
         }
       }
-
-
-      //const CustomEditor :any = Handsontable.editors.BaseEditor.prototype.extend();
-      //CustomEditor.prototype.beginEditing = function() {};
-      
-      //Handsontable.editors.registerEditor("CustomEditor",CustomEditor);
-
     }
     )
     hot.addHook('afterOnCellMouseDown', (event: MouseEvent, coords: Handsontable.CellCoords, TD: HTMLTableCellElement) => {
