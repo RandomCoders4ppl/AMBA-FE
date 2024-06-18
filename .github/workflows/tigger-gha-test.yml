@@ -2,10 +2,15 @@ name: Event Dispatch Receiver
 
 on:
   workflow_dispatch:
+   inputs:
+      amba_branch:
+        description: 'Branch to run the workflow on'
+        required: true
+        default: 'main'
   
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Print Payload
-        run: echo 'Received payload => ${{github.event.client_payload.amba_branch}}'
+        run: echo 'Received payload => ${{inputs.amba_branch}}'
