@@ -1,9 +1,8 @@
 name: Event Dispatch Receiver
 
 on:
-  repository_dispatch:
-    types: [triggered_by_be_repo]
-
+  workflow_dispatch:
+  
 jobs:
   build:
     runs-on: ubuntu-latest
